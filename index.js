@@ -64,7 +64,7 @@ function getId(resId){
   return resId.split('_')[1];
 }
 
-function fetchPostsToRedis(pageId){
+function fetchAndStorePosts(pageId){
   return FbAPI['page']({'pageId':pageId})
   .then(function(data){
     Promise.all(_.map(data.posts.data, function(post){
@@ -75,7 +75,7 @@ function fetchPostsToRedis(pageId){
 }
 
 function fetchLatestPostIds(){
-  return client.zrangeAsync('tw',1,102);
+  return client.zrangeAsync('tw',1,100);
 }
 
 var initCount = {};
@@ -110,8 +110,18 @@ function countReactions(postId){
   });
 }
 
+function countAndStoreReactions(postId){
+  return countReactions(postId).then(function (counts) {
+    var keyValues = _.flatten(_.zip(_.keys(counts),_.values(counts)));
+  // expensive crawl so persist indivudally
+    return client.hmsetAsync(postId,keyValues);
+  })
+
+}
+
+//TODO
 // fetchLatestPostIds.then(function (ids) {
-//
+// countAndStoreReactions
 // })
 // pages['tw']['appledaily.tw']
 
@@ -121,7 +131,8 @@ module.exports = {
   pages:pages,
   getUrlByEndpoint:getUrlByEndpoint,
   FbAPI:FbAPI,
-  fetchPostsToRedis:fetchPostsToRedis,
+  fetchAndStorePosts:fetchAndStorePosts,
   fetchLatestPostIds:fetchLatestPostIds,
-  countReactions:countReactions
+  countReactions:countReactions,
+  countAndStoreReactions:countAndStoreReactions
 }

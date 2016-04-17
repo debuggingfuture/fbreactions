@@ -7,7 +7,6 @@ var index = require('./index');
 var getUrlByEndpoint = index.getUrlByEndpoint;
 var FbAPI = index.FbAPI;
 var pages = index.pages;
-var fetchPostsToRedis= index.fetchPostsToRedis;
 var fetchLatestPostIds = index.fetchLatestPostIds;
 var countReactions = index.countReactions;
 var redis = require('redis');
@@ -79,9 +78,9 @@ describe('#redis', function() {
 
 describe('should fetch and store #limit posts', function() {
 
-  it('#fetchPostsToRedis should store #limit posts', function () {
+  it('#fetchAndStorePosts should store #limit posts', function () {
     // client.set("string key", "string val", redis.print);
-    return fetchPostsToRedis(pages['tw']['appledaily.tw'])
+    return index.fetchAndStorePosts(pages['tw']['appledaily.tw'])
     .then(function(data){
       return client.zcardAsync('tw')
       .then(function (data) {
@@ -110,13 +109,24 @@ describe('should fetch and store #limit posts', function() {
         done();
       });
     // countReactions
+  });
+
+  it('#countAndStoreReactions',function (done) {
+    var postId = '232633627068_10154431772567069';
+    this.timeout(5000);
+    return index.countAndStoreReactions(postId)
+    .then(function () {
+        client.hlenAsync(postId).then(function (data) {
+          expect(data).to.equal(7);
+          client.hgetAsync(postId,'LIKE').then(function (count) {
+            expect(count).to.above(1000);
+            done();
+          })
+        });
+    })
   })
 
 });
-
-
-
-
 
 
 
