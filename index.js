@@ -114,7 +114,7 @@ function countReactions(postId){
 function countAndStoreReactions(postId){
   return countReactions(postId).then(function (counts) {
     var keyValues = _.flatten(_.zip(_.keys(counts),_.values(counts)));
-  // expensive crawl so persist indivudally
+    // expensive crawl so persist indivudally
     return client.hmsetAsync(postId,keyValues);
   })
 
@@ -126,8 +126,8 @@ function loadLatestPosts(){
   .then(function (data) {
     console.log(data);
     //TODO need if need of cursor
-      var cursor = data[0];
-      return data[1];
+    var cursor = data[0];
+    return data[1];
   });
 }
 
@@ -140,22 +140,26 @@ function _groupByIndex(collection,cb){
   return result;
 }
 
+function multiHgetallAsync(ids) {
+  var multi = client.multi();
+  _.forEach(ids,function (ids) {
+    multi.hgetall(ids);
+  });
+  return multi.execAsync()
+}
+
 function countReactionsForLatestPost() {
   return loadLatestPosts()
   .then(function (posts) {
+    var postIds = _groupByIndex(posts,function (i) {
+      return i % 2;
+    })[1];
+    console.log("counting for "+postIds.length);
 
-      var multi = client.multi();
-      var postIds = _groupByIndex(posts,function (i) {
-        return i % 2;
-      })[1];
-      console.log("counting for "+postIds.length);
-      _.forEach(postIds,function (postId) {
-        multi.hgetall(postId);
-      });
-      return multi.execAsync()
-      .then(function (data) {
-        return data;
-      });
+    return multiHgetallAsync(postIds)
+    .then(function (data) {
+      return data;
+    });
   })
 }
 
@@ -172,6 +176,7 @@ function countReactionsForLatestPost() {
 module.exports = {
   REACTION_TYPES:REACTION_TYPES,
   _groupByIndex:_groupByIndex,
+  multiHgetallAsync:multiHgetallAsync,
   pages:pages,
   getUrlByEndpoint:getUrlByEndpoint,
   FbAPI:FbAPI,
