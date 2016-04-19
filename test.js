@@ -21,6 +21,20 @@ var _ = require('lodash');
 client = redis.createClient({host:'192.168.99.100'});
 
 
+//Util
+describe('_groupByIndex',function () {
+  it('should work for normal input',function () {
+    var input = ['a','b','c','d'];
+    expect(index._groupByIndex(input,function (i) {
+      return i %2;
+    })).to.eql({
+      0:['a','c'],
+      1:['b','d']
+    });
+  })
+})
+
+
 describe('#getUrlByEndpoint', function() {
   it('should return correct endpoint', function () {
     expect(getUrlByEndpoint('page',{'pageId':123})).to.equal('https://graph.facebook.com/v2.6/123');
@@ -98,36 +112,68 @@ describe('should fetch and store #limit posts', function() {
   });
 
   it('#countReactions',function (done) {
-    this.timeout(5000);
+    this.timeout(8000);
     return countReactions('232633627068_10154431772567069')
-      .then(function(counts){
-        expect(counts['LIKE']).to.be.above(900);
-        var reactionsTotal = _.chain(counts).values().sum().value()-counts.total
-        console.log(_.values(counts));
-        // There are some delay on total count and reaction objects
-        expect(reactionsTotal-counts.total).to.below(10);
-        done();
-      });
+    .then(function(counts){
+      expect(counts['LIKE']).to.be.above(900);
+      var reactionsTotal = _.chain(counts).pick(index.REACTION_TYPES).values().sum().value();
+      // There are some delay on total count and reaction objects
+      expect(reactionsTotal-counts.total).to.below(10);
+      done();
+    });
     // countReactions
   });
 
   it('#countAndStoreReactions',function (done) {
     var postId = '232633627068_10154431772567069';
-    this.timeout(5000);
+    this.timeout(8000);
     return index.countAndStoreReactions(postId)
     .then(function () {
-        client.hlenAsync(postId).then(function (data) {
-          expect(data).to.equal(7);
-          client.hgetAsync(postId,'LIKE').then(function (count) {
-            expect(count).to.above(1000);
-            done();
-          })
-        });
+      client.hlenAsync(postId).then(function (data) {
+        expect(data).to.equal(8);
+        client.hgetAsync(postId,'LIKE').then(function (count) {
+          expect(count).to.above(1000);
+          done();
+        })
+      });
     })
   })
 
 });
+// setup for mget test
+// .then(Promise.all(_.range(10000).map(function (i) {
+//   return client.delAsync(i);
+// })))
+        // multi.hset(i,'key',i);
+describe('it should count latest posts',function () {
 
+  beforeEach(function() {
+    return client.delAsync('tw')
+
+    .then(function () {
+      var multi = client.multi();
+      _.range(10000).map(function (i) {
+        multi.zadd('tw',-Date.now(),i);
+      })
+      return multi.execAsync();
+    });
+  });
+  it('loadLatestPosts should return latest 1000 posts in store',function () {
+    return index.loadLatestPosts()
+    .then(function (data) {
+      //200 is score(time)+key
+      expect(data.length).to.above(2000);
+    })
+  });
+  it('countReactionsForLatestPost',function (done) {
+    this.timeout(8000);
+    return index.countReactionsForLatestPost()
+    .then(function (data){
+      expect(data.length).to.above(1000);
+      done();
+    })
+  })
+});
 
 
 // client.hset("hash key", "hashtest 1", "some value", redis.print);

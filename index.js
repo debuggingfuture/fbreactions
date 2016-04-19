@@ -80,8 +80,8 @@ function fetchLatestPostIds(){
 
 var initCount = {};
 // 'NONE',
-var reactionTypes=['LIKE','LOVE','WOW','HAHA','SAD','ANGRY'];
-_.forEach(reactionTypes,function (reaction) {
+var REACTION_TYPES=['LIKE','LOVE','WOW','HAHA','SAD','ANGRY'];
+_.forEach(REACTION_TYPES,function (reaction) {
   initCount[reaction]=0;
 });
 
@@ -94,6 +94,7 @@ function countReactions(postId){
     if(data.summary){
       counts['total']=data.summary.total_count;
     }
+    counts['updated_at']= Date.now();
     if(data.paging && data.paging.next){
       return rp.get({
         uri:data.paging.next,
@@ -119,6 +120,47 @@ function countAndStoreReactions(postId){
 
 }
 
+//problem: keep adding during the process
+function loadLatestPosts(){
+  return client.zscanAsync('tw',0,'MATCH', '*','COUNT',1000)
+  .then(function (data) {
+    console.log(data);
+    //TODO need if need of cursor
+      var cursor = data[0];
+      return data[1];
+  });
+}
+
+function _groupByIndex(collection,cb){
+  var result = {};
+  _.forEach(collection,function (value,i) {
+    var key = cb(i);
+    if (_.has(result, key)) result[key].push(value); else result[key] = [value];
+  });
+  return result;
+}
+
+function countReactionsForLatestPost() {
+  return loadLatestPosts()
+  .then(function (posts) {
+
+      var multi = client.multi();
+      var postIds = _groupByIndex(posts,function (i) {
+        return i % 2;
+      })[1];
+      console.log("counting for "+postIds.length);
+      _.forEach(postIds,function (postId) {
+        multi.hgetall(postId);
+      });
+      return multi.execAsync()
+      .then(function (data) {
+        return data;
+      });
+  })
+}
+
+
+
 //TODO
 // fetchLatestPostIds.then(function (ids) {
 // countAndStoreReactions
@@ -128,11 +170,15 @@ function countAndStoreReactions(postId){
 
 
 module.exports = {
+  REACTION_TYPES:REACTION_TYPES,
+  _groupByIndex:_groupByIndex,
   pages:pages,
   getUrlByEndpoint:getUrlByEndpoint,
   FbAPI:FbAPI,
   fetchAndStorePosts:fetchAndStorePosts,
   fetchLatestPostIds:fetchLatestPostIds,
   countReactions:countReactions,
-  countAndStoreReactions:countAndStoreReactions
+  countAndStoreReactions:countAndStoreReactions,
+  countReactionsForLatestPost:countReactionsForLatestPost,
+  loadLatestPosts:loadLatestPosts
 }
