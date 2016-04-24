@@ -1,0 +1,15 @@
+{
+  "name": "fbreactions",
+  "description": "Scripts for collecting and moving around appops data",
+  "runtime": "nodejs",
+  "memory": 128,
+  "timeout": 300,
+  "role": "arn:aws:iam::561662081205:role/lambda_basic_vpc_execution",
+  "environment": {
+    "REDIS_HOST":"reactions-redis.qqwobp.ng.0001.apse1.cache.amazonaws.com"
+  },
+  "vpc":{
+    "securityGroups":["sg-bc21d5d9"],
+    "subnets":["subnet-44afb030","subnet-0ed0ed48"]
+  }
+}
