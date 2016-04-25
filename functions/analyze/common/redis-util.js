@@ -8,7 +8,7 @@ var initRedis = function () {
   return redis;
 }
 
-function initClient(redis){
+function initClient(){
   var redis = initRedis();
   var client = redis.createClient({host:process.env.REDIS_HOST,connect_timeout:10000});
   client.on("error", function (err) {

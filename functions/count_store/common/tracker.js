@@ -21,7 +21,7 @@ function Tracker(setKey){
     winston.log('info','fetchAndStorePosts',pageId);
     return FbAPI['page']({'pageId':pageId})
     .then(function(data){
-      Promise.all(_.map(data.posts.data, function(post){
+      return Promise.all(_.map(data.posts.data, function(post){
         var created_time = Date.parse(post.created_time);
         return client.zaddAsync(setKey, -created_time, post.id);
       }));
@@ -73,6 +73,11 @@ function Tracker(setKey){
 
   }
 
+
+  function loadPostsByDateRange(start,end) {
+    return client.zrangebyscoreAsync(setKey, -end, -start);
+  }
+
   //problem: keep adding during the process
   function loadLatestPosts(count,match){
     if(!count){
@@ -91,30 +96,40 @@ function Tracker(setKey){
     });
   }
 
-function aggReactionsForLatestPostByPageId(pageId) {
-    var match = pageId+'_*';
-    return aggReactionsForLatestPost(postsLimit,match);
-}
+  function aggReactionsForPostsByDateRange(start,end) {
+    return loadPostsByDateRange(start,end)
+    .then(aggReactionsForPosts);
+  }
+
+  function aggReactionsForLatestPostByPageId(postsLimit,pageId) {
+      var match = pageId+'_*';
+      return aggReactionsForLatestPost(postsLimit,match);
+  }
+
+  function aggReactionsForPosts(posts,postsLimit) {
+    if(!postsLimit){
+      postsLimit = posts.length * 2;
+    }
+    var postIds = [];
+    if(!_.isEmpty(posts)){
+      postIds = util._groupByIndex(_.take(posts,postsLimit*2),function (i) {
+        return i % 2;
+      })[0];
+    }
+    //use take as work around at the moment
+    console.log(postIds);
+    winston.log('info','counting no. of ids: %s',postIds.length);
+    return redisUtil.multiHgetallAsync(client, postIds)
+    .then(function (countsOfPosts) {
+      winston.log('info','got result from redis',countsOfPosts.length);
+      return util.sumReactions(countsOfPosts);
+    });
+  }
 
   function aggReactionsForLatestPost(postsLimit,match) {
     winston.log('info','aggregate with match %s', match);
     return loadLatestPosts(postsLimit,match)
-    .then(function (posts) {
-      var postIds = [];
-      if(!_.isEmpty(posts)){
-        postIds = util._groupByIndex(_.take(posts,postsLimit*2),function (i) {
-          return i % 2;
-        })[0];
-      }
-      //use take as work around at the moment
-      console.log(postIds);
-      winston.log('info','counting no. of ids: %s',postIds.length);
-      return redisUtil.multiHgetallAsync(client, postIds)
-      .then(function (countsOfPosts) {
-        winston.log('info','got result from redis',countsOfPosts.length,countsOfPosts);
-        return util.sumReactions(countsOfPosts);
-      });
-    });
+    .then(aggReactionsForPosts);
   }
 
   function fetchLatestPostIds(){
@@ -150,7 +165,10 @@ function aggReactionsForLatestPostByPageId(pageId) {
     countAndStoreForLatestPost:countAndStoreForLatestPost,
     countAndStoreReactions:countAndStoreReactions,
     loadLatestPosts:loadLatestPosts,
-    aggReactionsForLatestPost:aggReactionsForLatestPost
+    aggReactionsForLatestPost:aggReactionsForLatestPost,
+    aggReactionsForLatestPostByPageId:aggReactionsForLatestPostByPageId,
+    aggReactionsForPostsByDateRange:aggReactionsForPostsByDateRange,
+    loadPostsByDateRange:loadPostsByDateRange
   }
 }
 

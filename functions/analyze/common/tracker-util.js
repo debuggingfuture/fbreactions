@@ -16,6 +16,8 @@ function initCount(){
    return result;
  },{});
 }
+
+//TODO find max in same iteration
 function sumReactions(counts){
   var posts = counts.filter(_.isObject);
   var agg = posts.reduce(function (prev,curr) {
