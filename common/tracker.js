@@ -5,7 +5,18 @@ var FbAPI = require('../common/fb-api').FbAPI;
 var rp = require('request-promise');
 var winston = require('winston');
 var Throttle= require('../common/throttle').Throttle;
+var redisUtil = require('../common/redis-util');
+var client = redisUtil.initClient();
+
 function Tracker(setKey){
+  function stats(){
+    return client.zcardAsync(setKey)
+    .then(function (data) {
+      console.log(data);
+      winston.log('info %s posts count: %s', setKey, data);
+    });
+  }
+
   function fetchAndStorePosts(pageId){
     winston.log('info','fetchAndStorePosts',pageId);
     return FbAPI['page']({'pageId':pageId})
@@ -80,8 +91,12 @@ function Tracker(setKey){
     });
   }
 
-  function aggReactionsForLatestPost(postsLimit,pageId) {
+function aggReactionsForLatestPostByPageId(pageId) {
     var match = pageId+'_*';
+    return aggReactionsForLatestPost(postsLimit,match);
+}
+
+  function aggReactionsForLatestPost(postsLimit,match) {
     winston.log('info','aggregate with match %s', match);
     return loadLatestPosts(postsLimit,match)
     .then(function (posts) {
@@ -94,7 +109,7 @@ function Tracker(setKey){
       //use take as work around at the moment
       console.log(postIds);
       winston.log('info','counting no. of ids: %s',postIds.length);
-      return multiHgetallAsync(postIds)
+      return redisUtil.multiHgetallAsync(client, postIds)
       .then(function (countsOfPosts) {
         winston.log('info','got result from redis',countsOfPosts.length,countsOfPosts);
         return util.sumReactions(countsOfPosts);
@@ -103,12 +118,13 @@ function Tracker(setKey){
   }
 
   function fetchLatestPostIds(){
+    winston.log('info','latest posts for %s', setKey);
     return client.zrangeAsync(setKey,1,100);
   }
 
 
-  var BURST_RATE = 5; // 1req/ min burst rate
-  var FILL_RATE = 3; // 120/hour sustained rate
+  var BURST_RATE = 50; // 1req/ min burst rate
+  var FILL_RATE = 30; // 120/hour sustained rate
   var throttle = Throttle(BURST_RATE,FILL_RATE);
 
   // Both the token bucket and rate limiter should be used with a message queue or some way of preventing multiple simultaneous calls to removeTokens().
@@ -116,10 +132,10 @@ function Tracker(setKey){
   //can't just fail if reach limit - starvation
   function countAndStoreForLatestPost(){
     winston.log('info','countAndStoreForLatestPost');
-    fetchLatestPostIds()
+    return fetchLatestPostIds()
     .then(function (ids) {
-      console.log(ids);
-      throttle.next(ids, function (id) {
+      console.log(ids.length);
+      return throttle.promise(ids, function (id) {
         countAndStoreReactions(id);
       });
     });
@@ -127,6 +143,7 @@ function Tracker(setKey){
 
 
   return {
+    stats:stats,
     fetchAndStorePosts:fetchAndStorePosts,
     fetchLatestPostIds:fetchLatestPostIds,
     countReactions:countReactions,

@@ -4,11 +4,6 @@ var getUrlByEndpoint = index.getUrlByEndpoint;
 var fetchLatestPostIds = index.fetchLatestPostIds;
 var _ = require('lodash');
 
-//
-// var redis = index.initRedis();
-// client = redis.createClient({host:'192.168.99.100'});
-
-
 describe('redis helper',function () {
   beforeEach(function () {
     Promise.all(_.range(10000).map(function (i) {
@@ -24,7 +19,7 @@ describe('redis helper',function () {
 
   })
   it('multiHgetallAsync',function () {
-    index.multiHgetallAsync(_.range(10000))
+    multiHgetallAsync(client, _.range(10000))
     .then(function (data) {
       expect(data.length).equal(10000);
     })
