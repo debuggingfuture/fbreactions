@@ -1,0 +1,21 @@
+.d3 {
+  font: 10px sans-serif;
+  border: 1px solid #555;
+}
+
+.d3-point {
+  fill: #2B8FF3;
+  stroke: #1D5FA2;
+  stroke-width: 2;
+}
+
+.d3-tooltip-rect {
+  fill: #fff;
+  stroke: #555;
+  stroke-width: 1;
+}
+
+.d3-tooltip-text {
+  font-size: 18px;
+  font-weight: bold;
+}
