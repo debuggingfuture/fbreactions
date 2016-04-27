@@ -36,7 +36,7 @@ module.exports = {
   externals: {
     //don't bundle the 'react' npm package with our bundle.js
     //but get it from a global 'React' variable
-    'react': 'React'
+    // 'react': 'React'
   },
   resolve: {
     root: [__dirname],
@@ -47,7 +47,7 @@ module.exports = {
     template: 'index.ejs', // Load a custom template
     // inject: 'body' // Inject all scripts into the body
   })
-]
+],
 //for DEV only TODO another config for PRD
-// devtool:"eval"
+devtool:"eval"
 }
