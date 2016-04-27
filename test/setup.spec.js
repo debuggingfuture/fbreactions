@@ -1,6 +1,6 @@
 beforeEach(function() {
   //Not working
-  require('dotenv').config({path: '../.env'});
+  require('dotenv').config({path: '.env'});
   console.log('before every test in every file');
   chai = require('chai');
   expect = chai.expect;

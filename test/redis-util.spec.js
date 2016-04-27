@@ -22,3 +22,29 @@ describe('#redis', function() {
     });
   });
 });
+
+
+describe('redis helper',function (done) {
+  var COUNT=10000;
+  beforeEach(function () {
+    return Promise.all(_.range(COUNT).map(function (i) {
+      return client.delAsync(i);
+    }))
+    .then(function () {
+      var multi = client.multi();
+      _.range(COUNT).map(function (i) {
+        multi.hset(i,'key','value:'+i);
+      });
+      return multi.execAsync().then(done);
+    })
+
+  })
+  it('multiHgetallAsync',function (done) {
+    redisUtil.multiHgetallAsync(client, _.range(COUNT))
+    .then(function (data) {
+      console.log(data);
+      expect(data.length).equal(COUNT);
+      done();
+    })
+  })
+})

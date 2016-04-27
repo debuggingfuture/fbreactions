@@ -8,6 +8,7 @@ var client = require('../common/redis-util').initClient();
 var moment = require('moment');
 describe('should fetch and store #limit posts', function() {
 
+  //TODO lower limit for page
   it('#fetchAndStorePosts should store #limit posts', function () {
     // client.set("string key", "string val", redis.print);
     return tracker.fetchAndStorePosts(pages['tw']['appledaily.tw'])
@@ -56,36 +57,30 @@ describe('should fetch and store #limit posts', function() {
 
 });
 
-function initCountWithPostCount() {
-  var init = trackerUtil.initCount();
-  init['postCount']=0;
-  return init;
-}
-
 describe('it should count by date range',function () {
-  var start = moment().startOf('day').subtract(1,'days').format('x');
-  var end =   moment().endOf('day').subtract(1,'days').format('x');
+  var start = moment().startOf('day').subtract(0,'days').format('x');
+  var end =   moment().endOf('day').subtract(0,'days').format('x');
   console.log('start:'+moment(parseInt(start)).format());
   console.log('end:'+moment(parseInt(end)).format());
   beforeEach(function() {
     console.log('fetchAndStorePosts');
     return client.delAsync(SET_KEY)
-      .then(tracker.fetchAndStorePosts.bind(this,'232633627068'))
+    .then(tracker.fetchAndStorePosts.bind(this,'232633627068'))
   });
 
   it('loadPostsByDateRange should return records just fetched ',function () {
 
     tracker.loadPostsByDateRange(start, end)
-      .then(function (data) {
-          expect(data.length).to.equal(100);
-      });
+    .then(function (data) {
+      expect(data.length).to.equal(100);
+    });
   })
 
   it('aggReactionsForPostsByDateRange  ',function () {
     return tracker.aggReactionsForPostsByDateRange(start,end)
     .then(function (data) {
-      expect(data).to.not.eql(initCountWithPostCount());
-      })
+      expect(data).to.not.eql(trackerUtil.initCountWithPostCount());
+    })
   });
 });
 
@@ -112,10 +107,14 @@ describe('it should count latest posts',function () {
   // TODO correctness
 
 
-  it('aggReactionsForLatestPost will agg only for matched pageId',function () {
-    return tracker.aggReactionsForLatestPost(5,'notExistPageId').then(function (data) {
-      expect(data).to.eql(initCountWithPostCount());
-      })
+  it('aggReactionsForLatestPost will agg only for matched pageId',function (done) {
+    this.timeout(8000);
+    return tracker.aggReactionsForLatestPost(5,'notExistPageId')
+    .then(function (data) {
+      console.log(data);
+      expect(data).to.eql(trackerUtil.initCountWithPostCount());
+      done();
+    })
   });
   it('aggReactionsForLatestPost will return summary',function (done) {
     this.timeout(8000);
@@ -134,8 +133,7 @@ describe('it should count latest posts',function () {
     .then(function (data){
       // TODO unit test counting separately
       console.log(data);
-
-      expect(_.keys(data)).to.eql(REACTION_TYPES.concat('total').concat('postCount'));
+      expect(_.keys(data)).to.eql(REACTION_TYPES.concat('total').concat('postCount').concat('tops'));
       expect(data['LIKE']).to.above(1);
       done();
     })

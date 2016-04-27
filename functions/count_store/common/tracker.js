@@ -122,7 +122,7 @@ function Tracker(setKey){
     return redisUtil.multiHgetallAsync(client, postIds)
     .then(function (countsOfPosts) {
       winston.log('info','got result from redis',countsOfPosts.length);
-      return util.sumReactions(countsOfPosts);
+      return util.sumReactionsWithTop(postIds,countsOfPosts);
     });
   }
 
