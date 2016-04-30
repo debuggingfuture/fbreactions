@@ -1,0 +1,18 @@
+.Chart{
+  z-index:9999;
+}
+.location{
+}
+.location img{
+  padding-top: 30%;
+  /*height:50%;*/
+  width:70%;
+  z-index:1000;
+}
+.location span {
+ position: absolute;
+ top:25%;
+ left: 20%;
+ font-size:5em;
+ /*top: 1%;*/
+}

@@ -1,7 +1,18 @@
 var ReactDOM = require('react-dom');
 var React = require('react');
-var App = require('./app.jsx');
+var Dataviz = require('./dataviz.jsx');
 var Chart = require('./chart');
-console.log(App);
+
+require('lib/semantic/semantic.css');
 console.log(Chart);
-window.app = ReactDOM.render(<App></App>, document.getElementById('chart'));
+window.app = ReactDOM.render(<Dataviz>
+
+
+
+
+</Dataviz>
+
+
+
+, document.getElementById('hk-viz'));
+window.app = ReactDOM.render(<Dataviz></Dataviz>, document.getElementById('tw-viz'));

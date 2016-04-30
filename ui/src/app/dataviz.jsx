@@ -2,8 +2,10 @@ var React = require('react');
 
 // window.app = React.renderComponent(App(), document.body);
 var _ = require('lodash');
+var classNames = require('classnames');
 
-//
+require('./dataviz.css');
+
 var X_MIN = 1;
 var X_MAX = 100;
 var Y_MIN = 10;
@@ -43,7 +45,7 @@ var dataGenerator = ns;
 //
 var Chart = require('./chart');
 
-var App = React.createClass({
+var Dataviz = React.createClass({
   getInitialState: function() {
     var domain = [0, 30];
     return {
@@ -51,7 +53,8 @@ var App = React.createClass({
       domain: {x: domain, y: [0, 100]},
       tooltip: null,
       prevDomain: null,
-      showingAllTooltips: false
+      showingAllTooltips: false,
+      float:'left'
     };
   },
 
@@ -79,12 +82,14 @@ var App = React.createClass({
   },
 
   render: function() {
+    // TODO refactor
+  // semantic ui float only work at column level
+  // Do this manually first
+  // https://facebook.github.io/react/docs/multiple-components.html#dynamic-children
     return (
-      <div className="App">
         <Chart
           appState={this.state}
           setAppState={this.setAppState} />
-      </div>
     );
   },
 
@@ -92,6 +97,6 @@ var App = React.createClass({
     return this.setState(partialState, callback);
   }
 });
-console.log(App);
+console.log(Dataviz);
 
-module.exports = App;
+module.exports = Dataviz;

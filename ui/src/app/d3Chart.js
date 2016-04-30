@@ -70,7 +70,7 @@ var svg = d3.select(el).append("svg")
       .append("text")
       .attr("dx", 1)
       .attr("dy", 1)
-      .text(function(d) { return d.count })
+      .text(function(d) { return d.count * 100 +'%' })
 
 
       svg.style("opacity", 1e-6)
