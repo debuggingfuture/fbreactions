@@ -12,7 +12,6 @@ function Tracker(setKey){
   function stats(){
     return client.zcardAsync(setKey)
     .then(function (data) {
-      console.log(data);
       winston.log('info %s posts count: %s', setKey, data);
     });
   }
@@ -23,7 +22,12 @@ function Tracker(setKey){
     .then(function(data){
       return Promise.all(_.map(data.posts.data, function(post){
         var created_time = Date.parse(post.created_time);
-        return client.zaddAsync(setKey, -created_time, post.id);
+        console.log('fetchAndStorePosts');
+        var postId = post.id;
+        return Promise.all([
+          redisUtil.hmsetObjAsync(client, postId+'_meta',post),
+          client.zaddAsync(setKey, -created_time, post.id)
+        ]);
       }));
     });
   }
@@ -65,12 +69,9 @@ function Tracker(setKey){
   function countAndStoreReactions(postId){
     winston.log('info','countAndStoreReactions: %s', postId);
     return countReactions(postId).then(function (counts) {
-      var keyValues = _.flatten(_.zip(_.keys(counts),_.values(counts)));
-      // expensive crawl so persist indivudally
       winston.log('info','Update postId: %s with ',postId,counts);
-      return client.hmsetAsync(postId,keyValues);
-    })
-
+      return redisUtil.hmsetObjAsync(client, postId,counts)
+    });
   }
 
 
@@ -102,8 +103,8 @@ function Tracker(setKey){
   }
 
   function aggReactionsForLatestPostByPageId(postsLimit,pageId) {
-      var match = pageId+'_*';
-      return aggReactionsForLatestPost(postsLimit,match);
+    var match = pageId+'_*';
+    return aggReactionsForLatestPost(postsLimit,match);
   }
 
   function aggReactionsForPosts(posts,postsLimit) {

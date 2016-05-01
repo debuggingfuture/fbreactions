@@ -10,18 +10,26 @@ function _groupByIndex(collection,cb){
   return result;
 }
 
-function initCount(){
+//Ideally merge them but wanna reuse past data
+function initCount() {
   return _.reduce(REACTION_TYPES.concat('total'),function (result,reaction) {
     result[reaction]=0;
     return result;
   },{});
 }
-//TODO refactor
-function initCountWithPostCount() {
-  var init = initCount();
-  init['postCount']=0;
-  init['tops']=[];
-  return init;
+
+function initCountWithSummary(){
+  return _.reduce(REACTION_TYPES,function (result,reaction) {
+    result['reactions'][reaction]=0;
+    return result;
+  },{
+    'reactions':{},
+    'summary':{
+      'total':0,
+      'postCount':0
+    },
+    'tops':[]
+  });
 }
 
 function _getEleOrPath(ele,path) {
@@ -63,21 +71,20 @@ function findLargestReaction(countByReaction) {
 //potential: Top by count; top by type
 //TODO don't distinugihs for unique id now
 function sumReactionsWithTop(ids, counts) {
+  console.log('sumReactionsWithTop');
   var sortedTops = [];
-  var total = 0;
   var agg = _.reduce(counts,function (prev,curr,i) {
-    var curr = _.mapValues(curr,function (v) {
-      return parseInt(v);
-    })
     if(!_.isObject(curr)){
       return prev;
     }
-    var result={};
-
-    REACTION_TYPES.concat('total').map(function (key) {
+    var result=initCountWithSummary();
+    REACTION_TYPES.map(function (key) {
+      curr[key]= parseInt(curr[key]);
       // ignored NaN
-      result[key] = parseInt(prev[key]) + parseInt(curr[key]);
+      result['reactions'][key] = parseInt(prev['reactions'][key]) + curr[key];
     });
+    result['summary']['total'] = parseInt(prev['summary']['total']) + parseInt(curr['total']);
+
     var largestPair = findLargestReaction(curr);
     var currObj = {
       id:ids[i],
@@ -85,10 +92,9 @@ function sumReactionsWithTop(ids, counts) {
       count:largestPair[1]
     };
     sortedTops = _insertIfTops(sortedTops,3,currObj,'count');
-    result['postCount']=result['postCount']+1;
+    result['summary']['postCount']=prev['summary']['postCount']+1;
     return result;
-  },initCountWithPostCount());
-
+  },initCountWithSummary());
   agg['tops']=sortedTops;
   return agg;
 }
@@ -108,20 +114,12 @@ function sumReactions(counts){
   return agg;
 }
 
-function asRatio(result) {
-
-  return _.pick(_.mapValues(result,function (v,k,o) {
-    return v / o['total'];
-  }),REACTION_TYPES);
-}
-
 module.exports = {
   _groupByIndex:_groupByIndex,
   initCount:initCount,
-  initCountWithPostCount:initCountWithPostCount,
+  initCountWithSummary:initCountWithSummary,
   sumReactions:sumReactions,
   findLargestReaction:findLargestReaction,
   _insertIfTops:_insertIfTops,
-  sumReactionsWithTop:sumReactionsWithTop,
-  asRatio:asRatio
+  sumReactionsWithTop:sumReactionsWithTop
 }

@@ -1,0 +1,88 @@
+{
+  "_args": [
+    [
+      "xhr-status@1.0.x",
+      "/Users/vincent/workspaces/fbreactions/node_modules/loads"
+    ]
+  ],
+  "_from": "xhr-status@>=1.0.0 <1.1.0",
+  "_id": "xhr-status@1.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/xhr-status",
+  "_nodeVersion": "0.10.35",
+  "_npmUser": {
+    "email": "npm@3rd-Eden.com",
+    "name": "3rdeden"
+  },
+  "_npmVersion": "2.7.5",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "xhr-status",
+    "raw": "xhr-status@1.0.x",
+    "rawSpec": "1.0.x",
+    "scope": null,
+    "spec": ">=1.0.0 <1.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/loads"
+  ],
+  "_resolved": "https://registry.npmjs.org/xhr-status/-/xhr-status-1.0.0.tgz",
+  "_shasum": "9a8d1ec3aef486f76729c1ead7ddb54562d8f08f",
+  "_shrinkwrap": null,
+  "_spec": "xhr-status@1.0.x",
+  "_where": "/Users/vincent/workspaces/fbreactions/node_modules/loads",
+  "author": {
+    "name": "Arnout Kazemier"
+  },
+  "bugs": {
+    "url": "https://github.com/unshiftio/xhr-status/issues"
+  },
+  "dependencies": {},
+  "description": "Normalize XHR status code/text across various of environments",
+  "devDependencies": {
+    "assume": "1.2.x",
+    "istanbul": "0.3.x",
+    "mocha": "2.2.x",
+    "pre-commit": "1.0.x"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "9a8d1ec3aef486f76729c1ead7ddb54562d8f08f",
+    "tarball": "https://registry.npmjs.org/xhr-status/-/xhr-status-1.0.0.tgz"
+  },
+  "gitHead": "b1c55cec0fea799fd6657e86667503a2776c2f54",
+  "homepage": "https://github.com/unshiftio/xhr-status",
+  "keywords": [
+    "status",
+    "statuscode",
+    "text",
+    "code",
+    "statustext",
+    "xhr"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "email": "npm@3rd-Eden.com",
+      "name": "3rdeden"
+    }
+  ],
+  "name": "xhr-status",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unshiftio/xhr-status.git"
+  },
+  "scripts": {
+    "100%": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- test.js",
+    "test": "mocha test.js",
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- test.js",
+    "watch": "mocha --watch test.js"
+  },
+  "version": "1.0.0"
+}

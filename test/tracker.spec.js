@@ -1,6 +1,7 @@
 var SET_KEY = 'test';
 var Tracker = require('../common/tracker').Tracker;
 var tracker = Tracker(SET_KEY);
+var api = require('../common/api');
 var REACTION_TYPES = require('../common/fb-api').REACTION_TYPES;
 var pages = require('../common/pages');
 var trackerUtil = require('../common/tracker-util');
@@ -32,10 +33,11 @@ describe('should fetch and store #limit posts', function() {
     this.timeout(8000);
     return tracker.countReactions('232633627068_10154431772567069')
     .then(function(counts){
+      console.log(counts);
       expect(counts['LIKE']).to.be.above(900);
       var reactionsTotal = _.chain(counts).pick(REACTION_TYPES).values().sum().value();
       // There are some delay on total count and reaction objects
-      expect(reactionsTotal-counts.total).to.below(10);
+      expect(reactionsTotal-counts['total']).to.below(10);
       done();
     });
   });
@@ -57,7 +59,7 @@ describe('should fetch and store #limit posts', function() {
 
 });
 
-describe('it should count by date range',function () {
+describe('it should fetch posts by date range',function () {
   var start = moment().startOf('day').subtract(0,'days').format('x');
   var end =   moment().endOf('day').subtract(0,'days').format('x');
   console.log('start:'+moment(parseInt(start)).format());
@@ -69,17 +71,34 @@ describe('it should count by date range',function () {
   });
 
   it('loadPostsByDateRange should return records just fetched ',function () {
-
     tracker.loadPostsByDateRange(start, end)
     .then(function (data) {
-      expect(data.length).to.equal(100);
+      expect(data.length).to.above(5);
     });
   })
 
+  it('store metadata for posts',function (done) {
+    // postIds
+    this.timeout(8000);
+    return tracker.loadPostsByDateRange(start, end)
+    .then(function (postIds) {
+      return api.loadPostsMetadata(postIds)
+      .then(function (data) {
+        expect(_.values(data).length).to.above(5);
+        done();
+      })
+    })
+
+  })
+// TODO countAndStoreForLatestPost
   it('aggReactionsForPostsByDateRange  ',function () {
-    return tracker.aggReactionsForPostsByDateRange(start,end)
-    .then(function (data) {
-      expect(data).to.not.eql(trackerUtil.initCountWithPostCount());
+    tracker.countAndStoreForLatestPost()
+    .then(function () {
+      return tracker.aggReactionsForPostsByDateRange(start,end)
+      .then(function (data) {
+        console.log(data);
+        expect(data).to.not.eql(trackerUtil.initCountWithSummary());
+      })
     })
   });
 });
@@ -100,7 +119,7 @@ describe('it should count latest posts',function () {
   it('loadLatestPosts should return latest 1000 posts in store',function () {
     return tracker.loadLatestPosts(5)
     .then(function (data) {
-      //200 is score(time)+key
+      //200 is score(time)+keymo
       expect(data.length).to.above(199);
     })
   });
@@ -112,7 +131,7 @@ describe('it should count latest posts',function () {
     return tracker.aggReactionsForLatestPost(5,'notExistPageId')
     .then(function (data) {
       console.log(data);
-      expect(data).to.eql(trackerUtil.initCountWithPostCount());
+      expect(data).to.eql(trackerUtil.initCountWithSummary());
       done();
     })
   });
@@ -132,9 +151,10 @@ describe('it should count latest posts',function () {
     .then(tracker.aggReactionsForLatestPostByPageId.bind(this,5,'232633627068'))
     .then(function (data){
       // TODO unit test counting separately
-      console.log(data);
-      expect(_.keys(data)).to.eql(REACTION_TYPES.concat('total').concat('postCount').concat('tops'));
-      expect(data['LIKE']).to.above(1);
+      expect(_.keys(data['reactions'])).to.eql(REACTION_TYPES);
+      // concat('total').concat('postCount').concat('tops')
+      expect(data['reactions']['LIKE']).to.above(1);
+        expect(data['summary']['total']).to.above(1);
       done();
     })
   })

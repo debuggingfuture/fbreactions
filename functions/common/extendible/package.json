@@ -1,0 +1,99 @@
+{
+  "_args": [
+    [
+      "extendible@0.1.x",
+      "/Users/vincent/workspaces/fbreactions/node_modules/requests"
+    ]
+  ],
+  "_from": "extendible@>=0.1.0 <0.2.0",
+  "_id": "extendible@0.1.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/extendible",
+  "_nodeVersion": "0.10.35",
+  "_npmUser": {
+    "email": "npm@3rd-Eden.com",
+    "name": "3rdeden"
+  },
+  "_npmVersion": "2.3.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "extendible",
+    "raw": "extendible@0.1.x",
+    "rawSpec": "0.1.x",
+    "scope": null,
+    "spec": ">=0.1.0 <0.2.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/requests"
+  ],
+  "_resolved": "https://registry.npmjs.org/extendible/-/extendible-0.1.1.tgz",
+  "_shasum": "e2a37ed87129fb4f9533e8a8d7506230a539c905",
+  "_shrinkwrap": null,
+  "_spec": "extendible@0.1.x",
+  "_where": "/Users/vincent/workspaces/fbreactions/node_modules/requests",
+  "author": {
+    "name": "Arnout Kazemier"
+  },
+  "bugs": {
+    "url": "https://github.com/bigpipe/extendible/issues"
+  },
+  "dependencies": {},
+  "description": "Extend constructors using backbone's .extend signature",
+  "devDependencies": {
+    "assume": "1.2.x",
+    "istanbul": "0.3.x",
+    "mocha": "2.2.x",
+    "pre-commit": "1.0.x"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "e2a37ed87129fb4f9533e8a8d7506230a539c905",
+    "tarball": "https://registry.npmjs.org/extendible/-/extendible-0.1.1.tgz"
+  },
+  "gitHead": "4a81c0329396c472055a8ac606dc95b9392a64f2",
+  "homepage": "https://github.com/bigpipe/extendible",
+  "keywords": [
+    "backbone",
+    "extend",
+    "extendable",
+    "extendible",
+    "extending",
+    "extends",
+    "inherit",
+    "inherits",
+    "lodash",
+    "constructor",
+    "inheritance",
+    "mixin",
+    "mixins"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "email": "info@3rd-Eden.com",
+      "name": "v1"
+    },
+    {
+      "email": "npm@3rd-Eden.com",
+      "name": "3rdeden"
+    }
+  ],
+  "name": "extendible",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bigpipe/extendible.git"
+  },
+  "scripts": {
+    "100%": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- test.js",
+    "test": "mocha test.js",
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- test.js",
+    "watch": "mocha --watch test.js"
+  },
+  "version": "0.1.1"
+}

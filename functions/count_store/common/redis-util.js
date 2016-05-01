@@ -17,11 +17,20 @@ function initClient(){
   return client;
 }
 
+function objToKv(obj) {
+  return _.flatten(_.zip(_.keys(obj),_.values(obj)));
+}
+
+function hmsetObjAsync(client, key,obj) {
+  var keyValues = objToKv(obj);
+  return client.hmsetAsync(key,keyValues);
+}
+
 
 function multiHgetallAsync(client, ids) {
   var multi = client.multi();
-  _.forEach(ids,function (ids) {
-    multi.hgetall(ids);
+  _.forEach(ids,function (id) {
+    multi.hgetall(id);
   });
   return multi.execAsync()
 }
@@ -30,5 +39,7 @@ function multiHgetallAsync(client, ids) {
 module.exports = {
   initRedis:initRedis,
   initClient:initClient,
-  multiHgetallAsync:multiHgetallAsync
+  multiHgetallAsync:multiHgetallAsync,
+  objToKv:objToKv,
+  hmsetObjAsync:hmsetObjAsync
 }

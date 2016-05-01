@@ -1,0 +1,90 @@
+{
+  "_args": [
+    [
+      "failure@1.1.x",
+      "/Users/vincent/workspaces/fbreactions/node_modules/loads"
+    ]
+  ],
+  "_from": "failure@>=1.1.0 <1.2.0",
+  "_id": "failure@1.1.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/failure",
+  "_nodeVersion": "0.12.3",
+  "_npmUser": {
+    "email": "npm@3rd-Eden.com",
+    "name": "3rdeden"
+  },
+  "_npmVersion": "2.9.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "failure",
+    "raw": "failure@1.1.x",
+    "rawSpec": "1.1.x",
+    "scope": null,
+    "spec": ">=1.1.0 <1.2.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/loads"
+  ],
+  "_resolved": "https://registry.npmjs.org/failure/-/failure-1.1.1.tgz",
+  "_shasum": "a8e83d3b1602d2468bff6ad4d9071e0103b81a87",
+  "_shrinkwrap": null,
+  "_spec": "failure@1.1.x",
+  "_where": "/Users/vincent/workspaces/fbreactions/node_modules/loads",
+  "author": {
+    "name": "Arnout Kazemier"
+  },
+  "bugs": {
+    "url": "https://github.com/unshiftio/failure/issues"
+  },
+  "dependencies": {},
+  "description": "Easily generate \"custom\" error objects with addition properties which can be stringfied with JSON.stringify",
+  "devDependencies": {
+    "assume": "1.2.x",
+    "istanbul": "0.3.x",
+    "mocha": "2.2.x",
+    "pre-commit": "1.0.x"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "a8e83d3b1602d2468bff6ad4d9071e0103b81a87",
+    "tarball": "https://registry.npmjs.org/failure/-/failure-1.1.1.tgz"
+  },
+  "gitHead": "43d48c1a60528ad8ca2fe9e0f6364195fef8dd68",
+  "homepage": "https://github.com/unshiftio/failure",
+  "keywords": [
+    "failure",
+    "error",
+    "errs",
+    "err",
+    "errors",
+    "fail",
+    "throw",
+    "custom"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "email": "npm@3rd-Eden.com",
+      "name": "3rdeden"
+    }
+  ],
+  "name": "failure",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unshiftio/failure.git"
+  },
+  "scripts": {
+    "100%": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- test.js",
+    "test": "mocha test.js",
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- test.js",
+    "watch": "mocha --watch test.js"
+  },
+  "version": "1.1.1"
+}

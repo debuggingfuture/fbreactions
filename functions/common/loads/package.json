@@ -1,0 +1,93 @@
+{
+  "_args": [
+    [
+      "loads@0.0.x",
+      "/Users/vincent/workspaces/fbreactions/node_modules/requests"
+    ]
+  ],
+  "_from": "loads@>=0.0.0 <0.1.0",
+  "_id": "loads@0.0.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/loads",
+  "_nodeVersion": "0.12.3",
+  "_npmUser": {
+    "email": "npm@3rd-Eden.com",
+    "name": "3rdeden"
+  },
+  "_npmVersion": "2.14.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "loads",
+    "raw": "loads@0.0.x",
+    "rawSpec": "0.0.x",
+    "scope": null,
+    "spec": ">=0.0.0 <0.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/requests"
+  ],
+  "_resolved": "https://registry.npmjs.org/loads/-/loads-0.0.4.tgz",
+  "_shasum": "97f3016397e70ddff480b81ec638ceea22a0a99c",
+  "_shrinkwrap": null,
+  "_spec": "loads@0.0.x",
+  "_where": "/Users/vincent/workspaces/fbreactions/node_modules/requests",
+  "author": {
+    "name": "Arnout Kazemier"
+  },
+  "bugs": {
+    "url": "https://github.com/unshiftio/loads/issues"
+  },
+  "dependencies": {
+    "failure": "1.1.x",
+    "one-time": "0.0.x",
+    "xhr-response": "1.0.x",
+    "xhr-status": "1.0.x"
+  },
+  "description": "Dedicated listening for xhr requests.",
+  "devDependencies": {
+    "assume": "1.2.x",
+    "eventstub": "1.0.x",
+    "istanbul": "0.3.x",
+    "mocha": "2.2.x",
+    "pre-commit": "1.1.x"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "97f3016397e70ddff480b81ec638ceea22a0a99c",
+    "tarball": "https://registry.npmjs.org/loads/-/loads-0.0.4.tgz"
+  },
+  "gitHead": "d0fa0b88f6e78b88821b9a7f9ff7ceee80f89ac9",
+  "homepage": "https://github.com/unshiftio/loads",
+  "keywords": [
+    "loads",
+    "xhr",
+    "load",
+    "request",
+    "ajax"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "email": "npm@3rd-Eden.com",
+      "name": "3rdeden"
+    }
+  ],
+  "name": "loads",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unshiftio/loads.git"
+  },
+  "scripts": {
+    "100%": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- test.js",
+    "test": "mocha test.js",
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- test.js",
+    "watch": "mocha --watch test.js"
+  },
+  "version": "0.0.4"
+}

@@ -29,7 +29,6 @@ loadPages().then(function (pagesByCountry) {
       return FbAPI['graph']({'key':pageKey})
         .then(function (data) {
           return [pageKey, data.id];
-            // console.log(data.id);
         })
       })).then(function (pairs) {
           console.log(JSON.stringify(_.fromPairs(pairs)));

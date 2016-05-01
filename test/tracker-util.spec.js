@@ -1,6 +1,7 @@
 var trackerUtil = require('../common/tracker-util');
 var sumReactions = trackerUtil.sumReactions;
 var initCount = trackerUtil.initCount;
+var initCountWithSummary = trackerUtil.initCountWithSummary;
 var REACTION_TYPES = require('../common/fb-api').REACTION_TYPES;
 var _groupByIndex = trackerUtil._groupByIndex;
 var _insertIfTops = trackerUtil._insertIfTops;
@@ -58,16 +59,35 @@ describe('_groupByIndex',function () {
   })
 });
 
-describe('#initCount',function () {
+describe('initCount',function () {
   it('return empty',function () {
     expect(initCount()).to.eql({
-      LIKE: 0,
-      LOVE: 0,
-      WOW: 0,
-      HAHA: 0,
-      SAD: 0,
-      ANGRY: 0,
-      total: 0,
+        LIKE: 0,
+        LOVE: 0,
+        WOW: 0,
+        HAHA: 0,
+        SAD: 0,
+        ANGRY: 0,
+        total:0
+    });
+  })
+})
+describe('initCountWithSummary',function () {
+  it('return empty',function () {
+    expect(initCountWithSummary()).to.eql({
+      'reactions':{
+        LIKE: 0,
+        LOVE: 0,
+        WOW: 0,
+        HAHA: 0,
+        SAD: 0,
+        ANGRY: 0
+      },
+      'summary':{
+        'total':0,
+        'postCount':0
+      },
+      'tops':[]
     });
   })
 })
@@ -99,7 +119,7 @@ describe('sum reactions',function () {
       LOVE: '3',
       WOW: '5',
       HAHA: '1',
-      SAD: '3',
+      SAD: '9',
       ANGRY: '0',
       total: '212',
       updated_at: '1461113126668'
@@ -119,9 +139,8 @@ describe('sum reactions',function () {
     var result = trackerUtil.sumReactionsWithTop(ids,counts);
     expect(result['tops'][0]).to.eql({'id':'1_1','type':'ANGRY',count:'56'});
     expect(result['tops'].length).to.eql(3);
-    expect(result['LIKE']).to.equal(6);
-    expect(result['total']).to.equal(57+76+212);
-
+    expect(result['reactions']['LIKE']).to.equal(6);
+    expect(result['summary']['total']).to.equal(57+76+212);
   })
   //
 });

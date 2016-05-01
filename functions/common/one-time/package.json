@@ -1,0 +1,97 @@
+{
+  "_args": [
+    [
+      "one-time@0.0.x",
+      "/Users/vincent/workspaces/fbreactions/node_modules/loads"
+    ]
+  ],
+  "_from": "one-time@>=0.0.0 <0.1.0",
+  "_id": "one-time@0.0.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/one-time",
+  "_nodeVersion": "0.10.35",
+  "_npmUser": {
+    "email": "npm@3rd-Eden.com",
+    "name": "3rdeden"
+  },
+  "_npmVersion": "2.3.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "one-time",
+    "raw": "one-time@0.0.x",
+    "rawSpec": "0.0.x",
+    "scope": null,
+    "spec": ">=0.0.0 <0.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/loads"
+  ],
+  "_resolved": "https://registry.npmjs.org/one-time/-/one-time-0.0.4.tgz",
+  "_shasum": "f8cdf77884826fe4dff93e3a9cc37b1e4480742e",
+  "_shrinkwrap": null,
+  "_spec": "one-time@0.0.x",
+  "_where": "/Users/vincent/workspaces/fbreactions/node_modules/loads",
+  "author": {
+    "name": "Arnout Kazemier"
+  },
+  "bugs": {
+    "url": "https://github.com/unshiftio/one-time/issues"
+  },
+  "dependencies": {},
+  "description": "Run the supplied function exactly one time (once)",
+  "devDependencies": {
+    "assume": "1.2.x",
+    "istanbul": "0.3.x",
+    "mocha": "2.2.x",
+    "pre-commit": "1.0.x"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "f8cdf77884826fe4dff93e3a9cc37b1e4480742e",
+    "tarball": "https://registry.npmjs.org/one-time/-/one-time-0.0.4.tgz"
+  },
+  "gitHead": "51c3cfdd7ab8d4ffcc3b0d927e914beb88d5c360",
+  "homepage": "https://github.com/unshiftio/one-time",
+  "keywords": [
+    "once",
+    "function",
+    "single",
+    "one",
+    "one-time",
+    "execution",
+    "nope"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "email": "npm@unshift.io",
+      "name": "unshift"
+    },
+    {
+      "email": "info@3rd-Eden.com",
+      "name": "v1"
+    },
+    {
+      "email": "npm@3rd-Eden.com",
+      "name": "3rdeden"
+    }
+  ],
+  "name": "one-time",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unshiftio/one-time.git"
+  },
+  "scripts": {
+    "100%": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- test.js",
+    "test": "mocha test.js",
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- test.js",
+    "watch": "mocha --watch test.js"
+  },
+  "version": "0.0.4"
+}

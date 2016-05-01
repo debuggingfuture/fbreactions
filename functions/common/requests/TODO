@@ -1,0 +1,19 @@
+## Bugs from Yaffle:
+
+https://github.com/Yaffle/EventSource/blob/master/eventsource.js
+
+## Bugs from JQ:
+
+https://github.com/jquery/jquery/blob/1.11-stable/src/ajax/xhr.js
+
+## High performance
+
+http://chimera.labs.oreilly.com/books/1230000000545/ch15.html#XHR_STREAMING
+
+## Multi part
+
+https://github.com/Automattic/socket.io-client/blob/06/lib/transports/xhr-multipart.js
+
+## Fetch API
+
+https://docs.google.com/presentation/d/1c35RyRdBTsO6Vl2lvXs1m8OBM6in531GVN-25V1l2mA/edit#slide=id.g5e759b9ce_125

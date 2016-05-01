@@ -22,7 +22,7 @@ var endpointConfig ={
   'page': {
     endpoint:'<%= pageId %>',
     defaultParams:{
-      'fields':'posts.limit(100)'
+      'fields':'posts.limit(100){created_time,name,message,link,description,caption}'
     }
   }
 }
