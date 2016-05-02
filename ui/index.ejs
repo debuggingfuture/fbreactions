@@ -1,134 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <style>
-    .fbreaction {
-      width: 50px;
-      height:50px;
-      background: url('official.png') 0px 0;
-      background-size : 150% 150%;
-    }
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <script src="https://fb.me/react-with-addons-15.0.1.min.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Intl.~locale.zh"></script>
+  <style>
+  .fbreaction {
+    width: 50px;
+    height:50px;
+    background: url('official.png') 0px 0;
+    background-size : 150% 150%;
+  }
+  section.tops{
+    padding-top:10vh;
+  }
+  </style>
+</head>
+<body>
+  <section class="ui container">
+    <h2 style="padding-top:5vh;" class="ui centered header">
+      港台Facebook媒體情緒監察
+    </h2>
+    <h2 class="ui horizontal divider header">
+      <div id="today"></div>
+    </h2>
+  </section>
+  <section class="ui container">
+    <div class="App ui centered aligned two column stackable grid">
+      <div class="location hk column center aligned">
+        <span>香港</span>
+        <img className='map' src="hkout.gif"></img>
+      </div>
+      <div class="column">
+        <div id="hk-viz">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="ui container tops">
+    <div class="ui segment">
+      <div id="hk-tops"></div>
+    </div>
+  </section>
+  <div class="ui divider"></div>
+  <section class="ui container">
+  </section>
+  <section>
+    <div class="App ui centered aligned four column grid">
+      <div class="column">
+        <div id="tw-viz">
+        </div>
+      </div>
+      <div class="location tw column">
+        <span>台灣</span>
+        <img className='map' src="twout.gif"></img>
+      </div>
+    </div>
+  </section>
+  <footer class="ui center aligned grid" >
+    <span>Inspired by: <a href="https://github.com/mroth/emojitracker">mroth/emojictracker</a></span>
+  </footer>
 
-</style>
-  </head>
-  <body>
-    <sectionc>
-      <div class="App ui centered aligned two column stackable grid">
-          <div class="location hk column">
-            <span>香港</span>
-            <img className='map' src="hkout.gif"></img>
-          </div>
-          <div class="column">
-            <div id="hk-viz">
-            </div>
-          </div>
-      </div>
-    </section>
-    <section class="ui container segment">
-      <div class="ui feed">
-      <div class="event">
-        <div class="label centered">
-          <img src="angry.png">
-          <div style="text-align:center">
-              250
-          </div>
-
-        </div>
-        <div class="content">
-          <div class="date">
-            3 days ago
-          </div>
-          <div class="summary">
-                <div class="header">
-                  <a target="_blank" href="">
-                  嘉義 探遺世山村 賞奇岩 遊瀑布群
-                </a>
-                </div>
-          </div>
-          <div class="meta text">
-            <div class="right floated">
-              蘋果日報
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="ui divider"></div>
-      <div class="event">
-        <div class="label">
-          <img src="/images/avatar/small/laura.jpg">
-        </div>
-        <div class="content">
-          <div class="date">
-            3 days ago
-          </div>
-          <div class="summary">
-             <a>Laura Faucet</a> created a post
-          </div>
-          <div class="extra text">
-            Have you seen what's going on in Israel? Can you believe it.
-          </div>
-        </div>
-      </div>
-    </div>
-    </section>
-    <section class="ui container segment">
-      <div class="ui divided items">
-  <div class="item">
-    <div class="ui tiny image">
-      <img src="angry.png">
-      <span >
-          689
-      </span>
-    </div>
-    <div class="left aligned content">
-      <div class="header">嘉義 探遺世山村 賞奇岩 遊瀑布群</div>
-      <div class="description">Content A</div>
-      <div class="extra">
-        <div class="right floated">
-          <div class="ui mini image">
-            <img src="angry.png">
-          </div>
-          蘋果
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="ui tiny image">
-      <img src="/images/wireframe/image.png">
-    </div>
-    <div class="middle aligned content">
-      Content B
-    </div>
-  </div>
-  <div class="item">
-    <div class="ui tiny image">
-      <img src="/images/wireframe/image.png">
-    </div>
-    <div class="middle aligned content">
-      Content C
-    </div>
-  </div>
-</div>
-    </section>
-    <section>
-      <div class="App ui centered aligned four column grid">
-          <div class="column">
-            <div id="tw-viz">
-            </div>
-          </div>
-          <div class="location tw column">
-            <span>台灣</span>
-            <img className='map' src="twout.gif"></img>
-          </div>
-      </div>
-    </section>
-    <footer class="ui center aligned grid" >
-      <span>Inspired by: <a href="https://github.com/mroth/emojitracker">mroth/emojictracker</a></span>
-
-    </footer>
-
-  </body>
+</body>
 </html>

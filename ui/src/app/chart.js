@@ -1,20 +1,27 @@
-var React = require('react');
-var _ = require('lodash');
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import _ from 'lodash';
 var d3Chart = require('./d3Chart');
+import { Provider, connect } from 'react-redux';
 
-var Chart = React.createClass({
+const mapStateToProps = (state) => {
+  return {
+    reactions: state['tw.reactionsByDay']
+  }
+}
+
+const Chart = React.createClass({
   getDefaultProps: function() {
     return {
-      width: '400',
-      height: '250'
+      width: '500',
+      height: '500'
     };
   },
 
   dispatcher: null,
 
   componentDidMount: function() {
-    var el = this.getDOMNode();
+    var el = ReactDOM.findDOMNode(this);
     var dispatcher = d3Chart.create(el, {
       width: this.props.width,
       height: this.props.height
@@ -25,13 +32,13 @@ var Chart = React.createClass({
   },
 
   componentDidUpdate: function(prevProps, prevState) {
-    var el = this.getDOMNode();
+    var el = ReactDOM.findDOMNode(this);
     d3Chart.update(el, this.getChartState(), this.dispatcher);
   },
 
   getChartState: function() {
     var appState = this.props.appState;
-
+    let reactions = this.props.reactions;
     var tooltips = [];
     if (appState.showingAllTooltips) {
       tooltips = appState.data;
@@ -40,7 +47,7 @@ var Chart = React.createClass({
       tooltips = [appState.tooltip];
     }
 
-    return _.assign({}, appState, {tooltips: tooltips});
+    return _.assign({}, appState, {tooltips, reactions});
   },
 
   render: function() {
@@ -73,4 +80,7 @@ var Chart = React.createClass({
   }
 });
 
-module.exports = Chart;
+export default connect(
+  mapStateToProps,
+  null
+)(Chart)

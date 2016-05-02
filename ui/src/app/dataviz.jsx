@@ -1,7 +1,8 @@
-var React = require('react');
+import React from 'react';
+import Chart from './chart';
 
 // window.app = React.renderComponent(App(), document.body);
-var _ = require('lodash');
+import _ from 'lodash';
 var classNames = require('classnames');
 
 require('./dataviz.css');
@@ -42,11 +43,9 @@ ns._uid = function() {
 
 var dataGenerator = ns;
 
-//
-var Chart = require('./chart');
-
 var Dataviz = React.createClass({
   getInitialState: function() {
+    console.log(this.state);
     var domain = [0, 30];
     return {
       data: this.getData(domain),

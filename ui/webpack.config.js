@@ -1,4 +1,5 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
@@ -36,7 +37,8 @@ module.exports = {
   externals: {
     //don't bundle the 'react' npm package with our bundle.js
     //but get it from a global 'React' variable
-    // 'react': 'React'
+    'intl':'IntlPolyfill',
+    'react': 'React'
   },
   resolve: {
     root: [__dirname],
@@ -46,6 +48,9 @@ module.exports = {
     title: 'FB REACTIONS DATA VISUALIZATION',
     template: 'index.ejs', // Load a custom template
     // inject: 'body' // Inject all scripts into the body
+  }),
+  new webpack.ProvidePlugin({
+    'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
   })
 ],
 //for DEV only TODO another config for PRD
