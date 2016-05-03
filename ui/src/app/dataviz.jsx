@@ -4,8 +4,10 @@ import Chart from './chart';
 // window.app = React.renderComponent(App(), document.body);
 import _ from 'lodash';
 var classNames = require('classnames');
-
+import { Provider, connect } from 'react-redux';
 require('./dataviz.css');
+
+let locationKey;
 
 var X_MIN = 1;
 var X_MAX = 100;
@@ -43,59 +45,85 @@ ns._uid = function() {
 
 var dataGenerator = ns;
 
-var Dataviz = React.createClass({
-  getInitialState: function() {
-    console.log(this.state);
-    var domain = [0, 30];
-    return {
-      data: this.getData(domain),
-      domain: {x: domain, y: [0, 100]},
-      tooltip: null,
-      prevDomain: null,
-      showingAllTooltips: false,
-      float:'left'
-    };
-  },
 
-  _allData:dataGenerator.generate(50),
-
-  getData: function(domain) {
-    return _.filter(this._allData, this.isInDomain.bind(null, domain));
-  },
-
-  addDatum: function(domain) {
-    this._allData.push(dataGenerator.generateDatum(domain));
-    return this.getData(domain);
-  },
-
-  removeDatum: function(domain) {
-    var match = _.find(this._allData, this.isInDomain.bind(null, domain));
-    if (match) {
-      this._allData = _.reject(this._allData, {id: match.id});
-    }
-    return this.getData(domain);
-  },
-
-  isInDomain: function(domain, d) {
-    return d.x >= domain[0] && d.x <= domain[1];
-  },
-
-  render: function() {
-    // TODO refactor
-  // semantic ui float only work at column level
-  // Do this manually first
-  // https://facebook.github.io/react/docs/multiple-components.html#dynamic-children
-    return (
-        <Chart
-          appState={this.state}
-          setAppState={this.setAppState} />
-    );
-  },
-
-  setAppState: function(partialState, callback) {
-    return this.setState(partialState, callback);
+const mapStateToProps = (state) => {
+  let reactions = !locationKey ? {} : state[[locationKey,'reactionsByDay'].join('.')]
+  return {
+    reactions:reactions
   }
-});
+}
+
+
+const Dataviz = (props) => {
+  locationKey = props.location;
+  return (
+      <Chart
+        reactions={props.reactions}
+        appState={props.state}
+        setAppState={props.setAppState} />
+  );
+}
+
+
+
+// const Dataviz = React.createClass({
+//   getInitialState: function() {
+//     console.log(this.props.location);
+//     var domain = [0, 30];
+//     return {
+//       locationKey: this.props.location,
+//       data: this.getData(domain),
+//       domain: {x: domain, y: [0, 100]},
+//       tooltip: null,
+//       prevDomain: null,
+//       showingAllTooltips: false,
+//       float:'left'
+//     };
+//   },
+//
+//   _allData:dataGenerator.generate(50),
+//
+//   getData: function(domain) {
+//     return _.filter(this._allData, this.isInDomain.bind(null, domain));
+//   },
+//
+//   addDatum: function(domain) {
+//     this._allData.push(dataGenerator.generateDatum(domain));
+//     return this.getData(domain);
+//   },
+//
+//   removeDatum: function(domain) {
+//     var match = _.find(this._allData, this.isInDomain.bind(null, domain));
+//     if (match) {
+//       this._allData = _.reject(this._allData, {id: match.id});
+//     }
+//     return this.getData(domain);
+//   },
+//
+//   isInDomain: function(domain, d) {
+//     return d.x >= domain[0] && d.x <= domain[1];
+//   },
+//
+//   render: function() {
+//     // TODO refactor
+//   // semantic ui float only work at column level
+//   // Do this manually first
+//   // https://facebook.github.io/react/docs/multiple-components.html#dynamic-children
+//     return (
+//         <Chart
+//           nodes={this.props.reactions}
+//           appState={this.state}
+//           setAppState={this.setAppState} />
+//     );
+//   },
+//
+//   setAppState: function(partialState, callback) {
+//     return this.setState(partialState, callback);
+//   }
+// });
 console.log(Dataviz);
 
-module.exports = Dataviz;
+export default connect(
+  mapStateToProps,
+  null
+)(Dataviz)

@@ -53,10 +53,9 @@ function createNodes(reactions) {
 }
 
 ns.update = function(el, state, dispatcher) {
-  console.log(state);
-  // if(_.isEmpty(state.reactions)){
-  //   return;
-  // }
+  if(_.isEmpty(state.reactions)){
+    return;
+  }
 
   //TODO 2nd update (componentDidUpdate) don't work
   var nodes = createNodes(state.reactions);

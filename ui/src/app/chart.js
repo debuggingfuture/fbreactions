@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-var d3Chart = require('./d3Chart');
-import { Provider, connect } from 'react-redux';
+import d3Chart from './d3Chart';
 
-const mapStateToProps = (state) => {
-  return {
-    reactions: state['tw.reactionsByDay']
-  }
-}
+let locationKey;
+//TODO pull up this state to dataviz
 
-const Chart = React.createClass({
+
+const Chart =  React.createClass({
   getDefaultProps: function() {
     return {
       width: '500',
@@ -26,8 +23,6 @@ const Chart = React.createClass({
       width: this.props.width,
       height: this.props.height
     }, this.getChartState());
-    dispatcher.on('point:mouseover', this.showTooltip);
-    dispatcher.on('point:mouseout', this.hideTooltip);
     this.dispatcher = dispatcher;
   },
 
@@ -37,50 +32,18 @@ const Chart = React.createClass({
   },
 
   getChartState: function() {
+
     var appState = this.props.appState;
     let reactions = this.props.reactions;
-    var tooltips = [];
-    if (appState.showingAllTooltips) {
-      tooltips = appState.data;
-    }
-    else if (appState.tooltip) {
-      tooltips = [appState.tooltip];
-    }
 
-    return _.assign({}, appState, {tooltips, reactions});
+    return _.assign({}, appState, { reactions});
   },
 
   render: function() {
     return (
       <div className="Chart"></div>
     );
-  },
-
-  showTooltip: function(d) {
-    if (this.props.appState.showingAllTooltips) {
-      return;
-    }
-
-    this.props.setAppState({
-      tooltip: d,
-      // Disable animation
-      prevDomain: null
-    });
-  },
-
-  hideTooltip: function() {
-    if (this.props.appState.showingAllTooltips) {
-      return;
-    }
-
-    this.props.setAppState({
-      tooltip: null,
-      prevDomain: null
-    });
   }
-});
 
-export default connect(
-  mapStateToProps,
-  null
-)(Chart)
+});
+export default Chart;

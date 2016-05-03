@@ -1,6 +1,5 @@
 var ReactDOM = require('react-dom');
-var Dataviz = require('./dataviz.jsx');
-var Chart = require('./chart');
+import Dataviz from './dataviz.jsx';
 //boilerplate..
 //https://github.com/whatwg/fetch/issues/56
 import { Provider, connect } from 'react-redux';
@@ -19,46 +18,54 @@ function getEndpoint(location) {
   return url;
 }
 
-function reactionsByDay(state = {}, action) {
+// https://github.com/acdlite/flux-standard-action
+// Hacky to make use of meta to skip unrelated actions
+function reactionsByDay(location, state = {}, action) {
   switch(action.type){
     case FETCH_AGG:
-    return action.reactions;
+      if(location === action.meta.location)  return action.reactions;
   }
   return state;
 }
-function tops(state =  [], action) {
+function tops(location, state =  [], action) {
   switch(action.type){
     case FETCH_AGG:
-    return action.tops;
+      if(location === action.meta.location) return action.tops;
   }
   return state;
 }
 let store = createStore(
   combineReducers({
-    "tw.reactionsByDay":reactionsByDay,
-    "tw.tops":tops
+    "tw.reactionsByDay":reactionsByDay.bind(null,'tw'),
+    "tw.tops":tops.bind(null,'tw'),
+    "hk.reactionsByDay":reactionsByDay.bind(null,'hk'),
+    "hk.tops":tops.bind(null,'hk')
   })
 );
 
 console.log(fetch);
 
 //
-fetch(getEndpoint('hk'))
-.then(function (res) {
-  return res.json();
-})
-.then(function (json) {
-  let today = Object.keys(json).sort().reverse()[0];
-  var data = _.pick(json[today],['tops','reactions']);
-  store.dispatch(_.assign({ type: FETCH_AGG }, data));
 
-})
+['hk','tw'].map(location=>
+  fetch(getEndpoint('hk'))
+  .then(function (res) {
+    return res.json();
+  })
+  .then(function (json) {
+    let today = Object.keys(json).sort().reverse()[0];
+    var data = _.pick(json[today],['tops','reactions']);
+    store.dispatch(_.assign({ type: FETCH_AGG, meta:{location}}, data));
+
+  })
+)
+
 
 require('lib/semantic/semantic.css');
-console.log(Chart);
+console.log(Dataviz);
 ReactDOM.render(
   <Provider store={store}>
-    <Dataviz ></Dataviz>
+    <Dataviz location='hk' ></Dataviz>
   </Provider>, document.getElementById('hk-viz')
 );
 // ReactDOM.render(
