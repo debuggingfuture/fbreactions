@@ -45,7 +45,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [new HtmlWebpackPlugin({
-    title: 'FB REACTIONS DATA VISUALIZATION',
+    title: '港台時事情緒天文台(測試中)',
     template: 'index.ejs', // Load a custom template
     // inject: 'body' // Inject all scripts into the body
   }),
