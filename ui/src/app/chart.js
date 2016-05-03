@@ -2,16 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import d3Chart from './d3Chart';
-
-let locationKey;
-//TODO pull up this state to dataviz
-
-
 const Chart =  React.createClass({
   getDefaultProps: function() {
     return {
       width: '500',
-      height: '500'
+      height: '400'
     };
   },
 

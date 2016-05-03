@@ -20,11 +20,11 @@
 <body>
   <section class="ui container">
     <h2 style="padding-top:5vh;" class="ui centered header">
-      港台網絡情緒天文台(測試中)
+      港台時事情緒天文台(測試中)
     </h2>
     <div style="text-align:center">
       <span>
-根據港台Facebook最受歡迎十個媒體專頁，每日統計不同Reaction的百份比。<a href="#method" >詳細方法</a>
+每日統計港台Facebook最受歡迎十個新聞媒體專頁不同Reaction的百份比。<a href="#method" >詳細方法</a>
       </span>
 
     </div>
@@ -45,6 +45,7 @@
     </div>
   </section>
   <section class="ui container tops">
+    <h3 class="ui horizontal divider header">今日頭條</h3>
     <div class="ui segment">
       <div id="hk-tops"></div>
     </div>
@@ -53,27 +54,35 @@
   <section class="ui container">
   </section>
   <section>
-    <div class="App ui centered aligned four column grid">
+    <div class="App ui centered aligned two column stackable grid">
       <div class="column">
         <div id="tw-viz">
         </div>
       </div>
-      <div class="location tw column">
+      <div class="location tw column center aligned">
         <span>台灣</span>
         <img className='map' src="twout.gif"></img>
       </div>
     </div>
   </section>
   <section class="ui container tops">
+    <h3 class="ui horizontal divider header">今日頭條</h3>
     <div class="ui segment">
       <div id="tw-tops"></div>
     </div>
   </section>
-  <section id="method">
-    TODO
+  <section id="method" class="ui container center aligned">
+    <h2 class="ui horizontal divider  header">
+          方法：
+    </h2>
+    <div class="">
+      TODO
+    </div>
   </section>
   <footer class="ui center aligned grid" >
     <span>Inspired by: <a href="https://github.com/mroth/emojitracker">mroth/emojictracker</a></span>
+    <div class=""><a href="https://github.com/vincentlaucy/fbreactions">Source Code</a>
+    </div>
   </footer>
 
 </body>

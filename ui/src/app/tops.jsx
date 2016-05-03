@@ -1,22 +1,18 @@
 import Top from './top.jsx';
 import { connect } from 'react-redux';
-let items = [];
-let tops = [1,2,4];
-var locationKey;
-const mapStateToProps = (state) => {
-  if(!locationKey) return {};
-  var key = [locationKey, 'tops'].join('.');
+const mapStateToProps = (state,props) => {
+  let tops = props.location ? state[[props.location, 'tops'].join('.')]  : [];
   return {
-    tops: state[key]
+    tops: tops
   }
 }
 
 const Tops = (props) => {
-  locationKey = props.location;
+  let items = [];
   if(props.tops){
     props.tops.forEach((top,i)=>{
       items.push(<Top info={top}></Top>);
-      if(i+1 != tops.length){
+      if(i+1 != props.tops.length){
         items.push(<div className="ui divider"></div>)
       }
     });

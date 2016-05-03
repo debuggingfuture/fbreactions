@@ -9,18 +9,15 @@ var TOOLTIP_HEIGHT = 30;
 
 //TODO class
 var ns = {};
-var svg;
 ns.create = function(el, props, state) {
 
   var fill = d3.scale.category10();
 
-
   // link the other four so largest fall inside, or by setting init position
   // http://bl.ocks.org/sathomas/191a8a302a363ac6a4b0
 
-
-  svg = d3.select(el).append("svg")
-  .attr("viewBox", "100 0 500 500")
+  let svg = d3.select(el).append("svg")
+  .attr("viewBox", "0 0 500 400")
   .attr("preserveAspectRatio", "xMinYMin meet")
   .attr("width", props.width)
   .attr("height", props.height);
@@ -43,11 +40,13 @@ function createNodes(reactions) {
   }
   //cal w/ LIKE
   let total = _.sum(_.values(reactions));
-
-  return _.map(_.omit(reactions, ['LIKE']),(v,k,o)=>(
+  let noLikes = _.omit(reactions, ['LIKE']);
+  let ratio_total =  _.sum(_.values(noLikes))/total;
+  return _.map(noLikes,(v,k,o)=>(
     {
       'type': k,
       'ratio': v/total,
+      'ratio_total': ratio_total,
       'count':v
     }));
 }
@@ -66,13 +65,13 @@ ns.update = function(el, state, dispatcher) {
 // {index: 2,type:'HAHA',count:0.1},
 // {index: 2,type:'HAHA',count:0.1}];
 
-    var node = svg.selectAll(".node")
+    var node = d3.select(el).select('svg').selectAll(".node")
     .data(nodes)
     .enter().append("g")
     .attr("class", "node");
 
     var sizeByCount=(d)=>(
-      Math.max(d.ratio,0.02)* 750
+      Math.sqrt(Math.max(d.ratio/d.ratio_total,0.05)) * 200
     )
 
     function tick(e) {
@@ -88,9 +87,9 @@ ns.update = function(el, state, dispatcher) {
     //TODO why link data?
     var force = d3.layout.force()
     .nodes(nodes)
-    .gravity(0.1)
-    .charge(-600)
-    .size([500,500])
+    .gravity(0.4)
+    .charge(-1500)
+    .size([500,400])
     .on("tick", tick)
     .start();
 

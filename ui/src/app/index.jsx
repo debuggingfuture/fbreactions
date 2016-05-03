@@ -48,14 +48,14 @@ console.log(fetch);
 //
 
 ['hk','tw'].map(location=>
-  fetch(getEndpoint('hk'))
+  fetch(getEndpoint(location))
   .then(function (res) {
     return res.json();
   })
   .then(function (json) {
     let today = Object.keys(json).sort().reverse()[0];
     var data = _.pick(json[today],['tops','reactions']);
-    store.dispatch(_.assign({ type: FETCH_AGG, meta:{location}}, data));
+    store.dispatch(_.assign({ type: FETCH_AGG, meta:{"location":location}}, data));
 
   })
 )
@@ -68,10 +68,10 @@ ReactDOM.render(
     <Dataviz location='hk' ></Dataviz>
   </Provider>, document.getElementById('hk-viz')
 );
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <Dataviz ></Dataviz>
-//   </Provider>, document.getElementById('tw-viz'));
+ReactDOM.render(
+  <Provider store={store}>
+    <Dataviz location='tw' ></Dataviz>
+  </Provider>, document.getElementById('tw-viz'));
 
   ReactDOM.render(
     <Provider store={store}>
@@ -81,7 +81,7 @@ ReactDOM.render(
     ReactDOM.render(
       <Provider store={store}>
         <Tops location="tw"></Tops>
-      </Provider>, document.getElementById('hk-tops'));
+      </Provider>, document.getElementById('tw-tops'));
 
       // var time
       ReactDOM.render(

@@ -6,6 +6,9 @@ const Top = (props) => {
   let emotionUrl = props.info.type+'.png';
   let url = 'https://www.facebook.com/'+props.info.id;
   let displayedTime = moment(props.info.created_time).format('MMM Do hh:mm');
+
+  let title = props.info.name ? props.info.name : props.info.message.substring(0,100) +' ...';
+
   return (<div className="event">
     <div className="label centered">
       <img src={emotionUrl} />
@@ -18,7 +21,7 @@ const Top = (props) => {
       <div className="summary">
         <div className="header">
           <a target="_blank" href={url}>
-            {props.info.name}
+            {title}
           </a>
         </div>
       </div>
