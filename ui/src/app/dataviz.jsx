@@ -46,8 +46,8 @@ ns._uid = function() {
 var dataGenerator = ns;
 
 
-const mapStateToProps = (state) => {
-  let reactions = !locationKey ? {} : state[[locationKey,'reactionsByDay'].join('.')]
+const mapStateToProps = (state,props) => {
+  let reactions = props.location ? state[[props.location,'reactionsByDay'].join('.')] : {};
   return {
     reactions:reactions
   }
@@ -55,7 +55,6 @@ const mapStateToProps = (state) => {
 
 
 const Dataviz = (props) => {
-  locationKey = props.location;
   return (
       <Chart
         reactions={props.reactions}

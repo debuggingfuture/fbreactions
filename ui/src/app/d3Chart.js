@@ -71,7 +71,7 @@ ns.update = function(el, state, dispatcher) {
     .attr("class", "node");
 
     var sizeByCount=(d)=>(
-      Math.sqrt(Math.max(d.ratio/d.ratio_total,0.05)) * 200
+      Math.sqrt(Math.max(d.ratio/d.ratio_total,0.05)) * 150
     )
 
     function tick(e) {
@@ -84,15 +84,16 @@ ns.update = function(el, state, dispatcher) {
       .attr("y", function(d) { return d.y; });
     }
 
-    //TODO why link data?
+// TODO tune the charge
+    // http://stackoverflow.com/questions/9901565/charge-based-on-size-d3-force-layout
+
     var force = d3.layout.force()
     .nodes(nodes)
     .gravity(0.4)
-    .charge(-1500)
+    .charge(-1700)
     .size([500,400])
     .on("tick", tick)
     .start();
-
 
     var images = node.append("image")
     .attr("xlink:href", (d)=>getReactionImageUrl(d.type))
@@ -100,10 +101,29 @@ ns.update = function(el, state, dispatcher) {
     .attr("y", function(d) { return d.y; })
     .attr("width", sizeByCount)
     .attr("height", sizeByCount)
+
     // .style("fill", function(d, i) { return fill(i & 3); })
     // .style("stroke", function(d, i) { return d3.rgb(fill(i & 3)).darker(2); })
     .call(force.drag)
     .on("mousedown", function() { d3.event.stopPropagation(); });
+
+    var like = d3.select(el).select('svg')
+    .append("image")
+    .attr("xlink:href", (d)=>getReactionImageUrl('LIKE'))
+    .attr("x", 360)
+    .attr("y", 360)
+    .attr("width", 30)
+    .attr("height", 30)
+    .call(force.drag)
+    .on("mousedown", function() { d3.event.stopPropagation(); });
+
+    var likeRatio = (state.reactions['LIKE'] /  _.sum(_.values(state.reactions))*100).toFixed(0);
+    d3.select(el).select('svg')
+    .append("text")
+    .attr("x", 400)
+    .attr("y", 380)
+    .text(likeRatio+'%')
+// state.reactions['LIKE'] + ' - ' +
 
     var labels = node
     .append("text")
