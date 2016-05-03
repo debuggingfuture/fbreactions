@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import moment from 'moment';
+import {getReactionImageUrl} from './reaction.js';
 moment.locale('zh-tw');
 // moment().format('MMMM Do YYYY, h:mm:ss a')
 const Top = (props) => {
-  let emotionUrl = 'images/'+props.info.type+'.png';
+  let emotionUrl = getReactionImageUrl(props.info.type)
+
   let url = 'https://www.facebook.com/'+props.info.id;
   let displayedTime = moment(props.info.created_time).format('MMM Do hh:mm');
 

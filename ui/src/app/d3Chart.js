@@ -2,7 +2,7 @@ var EventEmitter = require('events').EventEmitter;
 var d3 = require('d3');
 import _ from 'lodash';
 require('./d3Chart.css');
-
+import {getReactionImageUrl} from './reaction.js';
 var ANIMATION_DURATION = 400;
 var TOOLTIP_WIDTH = 30;
 var TOOLTIP_HEIGHT = 30;
@@ -95,9 +95,7 @@ ns.update = function(el, state, dispatcher) {
 
 
     var images = node.append("image")
-    .attr("xlink:href", function(d) {
-      return 'images/'+d.type.toLowerCase() + '.png';
-    })
+    .attr("xlink:href", (d)=>getReactionImageUrl(d.type))
     .attr("x", function(d) { return d.x; })
     .attr("y", function(d) { return d.y; })
     .attr("width", sizeByCount)
