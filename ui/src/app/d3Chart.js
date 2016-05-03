@@ -96,7 +96,7 @@ ns.update = function(el, state, dispatcher) {
 
     var images = node.append("image")
     .attr("xlink:href", function(d) {
-      return d.type.toLowerCase() + '.png';
+      return 'images/'+d.type.toLowerCase() + '.png';
     })
     .attr("x", function(d) { return d.x; })
     .attr("y", function(d) { return d.y; })

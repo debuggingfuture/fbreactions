@@ -3,4 +3,5 @@ node_modules/
 setup.sh
 ui/node_modules
 ui/dist
+ui/.publish
 .DS_Store
