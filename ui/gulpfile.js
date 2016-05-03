@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var ghPages = require('gulp-gh-pages');
 var gulp = require('gulp');
-
+var changed = require('gulp-changed');
 var webpackConfig = require('./webpack.config.js');
 
 gulp.task('webpack', function(callback) {
@@ -14,8 +14,8 @@ gulp.task('webpack', function(callback) {
 
 gulp.task('copy', function(){
   gulp.src('./images/**')
-    .pipe(changed(DIST+'/images'))
-    .pipe(gulp.dest(DIST+'/images'))
+    .pipe(changed('dist/images'))
+    .pipe(gulp.dest('dist/images'))
 });
 
 gulp.task('build', ['copy', 'webpack']);
