@@ -6,7 +6,7 @@
   "timeout": 300,
   "role": "arn:aws:iam::561662081205:role/lambda_basic_vpc_execution",
   "environment": {
-    "REDIS_HOST":"reactions-redis.sprfof.ng.0001.apne1.cache.amazonaws.com"
+    "REDIS_HOST":"fbreactions.sprfof.0001.apne1.cache.amazonaws.com"
   },
   "vpc":{
     "securityGroups":["sg-bc21d5d9"],

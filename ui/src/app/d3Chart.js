@@ -7,17 +7,19 @@ var ANIMATION_DURATION = 400;
 var TOOLTIP_WIDTH = 30;
 var TOOLTIP_HEIGHT = 30;
 
+var MAX_WIDTH=450;
+var MAX_HEIGHT=400;
+
 //TODO class
 var ns = {};
 ns.create = function(el, props, state) {
 
   var fill = d3.scale.category10();
-
   // link the other four so largest fall inside, or by setting init position
   // http://bl.ocks.org/sathomas/191a8a302a363ac6a4b0
 
   let svg = d3.select(el).append("svg")
-  .attr("viewBox", "0 0 500 400")
+  .attr("viewBox", "0 0 450 400")
   .attr("preserveAspectRatio", "xMinYMin meet")
   .attr("width", props.width)
   .attr("height", props.height);
@@ -51,6 +53,9 @@ function createNodes(reactions) {
     }));
 }
 
+ns.k = function (length,width,height) {
+  return Math.sqrt(length / (width * height));
+}
 ns.update = function(el, state, dispatcher) {
   if(_.isEmpty(state.reactions)){
     return;
@@ -86,12 +91,13 @@ ns.update = function(el, state, dispatcher) {
 
 // TODO tune the charge
     // http://stackoverflow.com/questions/9901565/charge-based-on-size-d3-force-layout
-
+    let k = this.k(nodes.length,MAX_WIDTH,MAX_HEIGHT);
+    console.log("k"+k);
     var force = d3.layout.force()
     .nodes(nodes)
     .gravity(0.4)
     .charge(-1700)
-    .size([500,400])
+    .size([MAX_WIDTH,MAX_HEIGHT])
     .on("tick", tick)
     .start();
 
@@ -131,7 +137,7 @@ ns.update = function(el, state, dispatcher) {
     .attr("dy", 1)
     .text(function(d) { return (d.ratio * 100).toFixed(0) +'%' })
 
-
+    d3.select(window).on('resize', this._resize.bind(this,el, nodes,force));
 
     d3.select(el)
     .on("mousedown", this._mousedown(nodes,force));
@@ -140,6 +146,20 @@ ns.update = function(el, state, dispatcher) {
     // this._drawPoints(el, scales, state.data, prevScales, dispatcher);
     // this._drawTooltips(el, scales, state.tooltips, prevScales);
   };
+
+  ns._resize = function (el, nodes,force) {
+    let width = parseInt(d3.select(el).style('width'), 10);
+        // resize the chart
+
+      var renderWidth  = Math.min(MAX_WIDTH, Math.max(300,width) );
+
+      var k = Math.sqrt(nodes.length / (renderWidth * MAX_HEIGHT));
+      force.size([ renderWidth,400]);
+      let svg = d3.select(el).select("svg")
+      .attr("width", renderWidth);
+
+      this._mousedown(nodes,force);
+  }
 
   ns._mousedown = function(nodes, force) {
     nodes.forEach(function(o, i) {
