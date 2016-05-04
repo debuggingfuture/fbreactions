@@ -47,7 +47,7 @@ const Report = (props) =>{
                       <img src={reactionImgUrl} className="ui mini rounded image" />
                       <div className="content">
                         {topReaction.count}
-                        <div className="sub header">{(topReaction.ratio.toFixed(2)*100)}%
+                        <div className="sub header">{(topReaction.ratio*100).toFixed(0)}%
                         </div>
                       </div>
                     </h4>
