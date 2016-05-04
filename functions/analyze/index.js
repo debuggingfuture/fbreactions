@@ -10,6 +10,7 @@ var api = require('./common/api');
 // var getRandomByWeight = require('random').getRandomByWeight;
 
 exports.handle = function(e, ctx,cb) {
+  winston.log('info','timezone',process.env.TZ);
   // ctx.succeed({ hello: e.name })
   Promise.all(['hk','tw'].map(function (location) {
     var tracker = Tracker(location);
@@ -20,7 +21,7 @@ exports.handle = function(e, ctx,cb) {
     //   winston.log('info','Agg: %s',location,result);
     //   console.log(trackerUtil.asRatio(result));
     // });
-    return Promise.all([0,1,2,3].map(function (d) {
+    return Promise.all(_.range(7).map(function (d) {
       var start = moment().startOf('day').subtract(d,'days').format('x');
       var end =   moment().endOf('day').subtract(d,'days').format('x');
 
