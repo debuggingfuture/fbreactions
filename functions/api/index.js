@@ -13,7 +13,6 @@ exports.handle = function(e, ctx,cb) {
   return api.cacheRead(e.params.querystring.location,start,end)
   .then(function (result) {
     console.log(result);
-    // cb(null,result);
     ctx.done(null, result);
   });
 }

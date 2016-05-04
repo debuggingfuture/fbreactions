@@ -8,7 +8,6 @@ var moment = require('moment');
 
 var api = require('./common/api');
 // var getRandomByWeight = require('random').getRandomByWeight;
-// var rp = require('request-promise');
 
 exports.handle = function(e, ctx,cb) {
   // ctx.succeed({ hello: e.name })
