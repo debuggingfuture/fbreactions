@@ -5,8 +5,8 @@ import d3Chart from './d3Chart';
 const Chart =  React.createClass({
   getDefaultProps: function() {
     return {
-      width: '500',
-      height: '400'
+      width: 450,
+      height: 400
     };
   },
 
@@ -23,7 +23,7 @@ const Chart =  React.createClass({
 
   componentDidUpdate: function(prevProps, prevState) {
     var el = ReactDOM.findDOMNode(this);
-    d3Chart.update(el, this.getChartState(), this.dispatcher);
+    d3Chart.update(el, this.getChartState(), this.props, this.dispatcher);
   },
 
   getChartState: function() {

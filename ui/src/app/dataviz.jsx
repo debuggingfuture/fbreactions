@@ -45,11 +45,10 @@ ns._uid = function() {
 
 var dataGenerator = ns;
 
-
 const mapStateToProps = (state,props) => {
-  let reactions = props.location ? state[[props.location,'reactionsByDay'].join('.')] : {};
+  let reactionsByDay = props.location ? state[[props.location,'reactionsByDay'].join('.')] : {};
   return {
-    reactions:reactions
+    reactions:reactionsByDay[state.selectedDate]
   }
 }
 
@@ -57,6 +56,7 @@ const mapStateToProps = (state,props) => {
 const Dataviz = (props) => {
   return (
       <Chart
+        id={props.location}
         reactions={props.reactions}
         appState={props.state}
         setAppState={props.setAppState} />
