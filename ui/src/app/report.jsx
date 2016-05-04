@@ -16,8 +16,6 @@ const mapStateToProps = (state,props) => {
     }
   );
 
-  _.droptopReactionsByDay
-
   return {
     topReactionsByDay
   }
@@ -31,12 +29,13 @@ const Report = (props) =>{
         <table className="ui very basic collapsing celled table">
           <thead>
             <tr>
+              <th></th>
               {dates.map(d=><th>{d}</th>)}
-              <th><FormattedDate value={Date.now()} day="numeric" month="narrow"></FormattedDate></th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td>{props.location}</td>
               {
                 sortedDates.map(d=>
                   {
@@ -48,7 +47,7 @@ const Report = (props) =>{
                       <img src={reactionImgUrl} className="ui mini rounded image" />
                       <div className="content">
                         {topReaction.count}
-                        <div className="sub header">10%
+                        <div className="sub header">{(topReaction.ratio.toFixed(2)*100)}%
                         </div>
                       </div>
                     </h4>
