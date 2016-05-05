@@ -74,6 +74,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactIntl = __webpack_require__(198);
 
+	var _reaction = __webpack_require__(167);
+
 	var _tops = __webpack_require__(220);
 
 	var _tops2 = _interopRequireDefault(_tops);
@@ -102,6 +104,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  url += '?location=' + location;
 	  return url;
 	}
+
+	// TODO by daily (HK) emotion?
+	// http://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
+	(function () {
+	  var reaction = _lodash2.default.sample(['haha', 'angry', 'love', 'wow', 'sad']);
+	  var link = document.createElement('link');
+	  link.type = 'image/x-icon';
+	  link.rel = 'shortcut icon';
+	  link.href = (0, _reaction.getReactionImageUrl)(reaction);
+	  document.getElementsByTagName('head')[0].appendChild(link);
+	})();
 
 	// TODO
 	// first load set it
