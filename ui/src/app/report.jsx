@@ -1,32 +1,20 @@
 import { connect } from 'react-redux';
 import moment from 'moment';
+import _ from 'lodash';
 moment.locale('zh-tw');
 import {getReactionImageUrl,getReactionsWithRatio} from './reaction.js';
-
+import ReportRow from './reportRow.jsx'
 // moment().format('MMMM Do YYYY, h:mm:ss a')
 import {IntlProvider,FormattedDate, addLocaleData} from 'react-intl';
 
-const mapStateToProps = (state,props) => {
-  let reactionsByDay = props.location ? state[[props.location,'reactionsByDay'].join('.')] : {};
-  let topReactionsByDay = _.mapValues(_.omitBy(reactionsByDay, _.isEmpty), reactions=>{
-    let withRatio = getReactionsWithRatio(reactions);
-    let top = _.maxBy(_.filter(withRatio,r=>r.type!=='LIKE'),'count');
-    //TODO filter nulls first
-      return  top;
-    }
-  );
+export default (props) =>{
+  let sortedDates = _.range(7).reverse()  .map(d=>moment().startOf('day').subtract(d,'days').valueOf());
 
-  return {
-    topReactionsByDay
-  }
-}
+  let dates = sortedDates.map(date=>
+    <FormattedDate value={date} day="numeric" month="narrow"></FormattedDate>);
 
-const Report = (props) =>{
-  let sortedDates = _.keys(props.topReactionsByDay).sort();
-  let dates = sortedDates.map(d=>parseInt(d.split("_")[0])).map(date=>
-    <FormattedDate value={date} day="numeric" month="narrow"></FormattedDate>)
       return (
-        <table className="ui very basic collapsing celled table">
+        <table className="ui very basic collapsing celled padded table">
           <thead>
             <tr>
               <th></th>
@@ -34,32 +22,9 @@ const Report = (props) =>{
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>{props.location}</td>
-              {
-                sortedDates.map(d=>
-                  {
-                    let topReaction = props.topReactionsByDay[d];
-                    let reactionImgUrl = getReactionImageUrl(topReaction.type);
-
-                    return (<td>
-                    <h4 className="ui image header">
-                      <img src={reactionImgUrl} className="ui mini rounded image" />
-                      <div className="content">
-                        {topReaction.count}
-                        <div className="sub header">{(topReaction.ratio*100).toFixed(0)}%
-                        </div>
-                      </div>
-                    </h4>
-                  </td>)
-                  }
-              )}
-                </tr>
-              </tbody>
-            </table>
-          )
-        }
-        export default connect(
-          mapStateToProps,
-          null
-        )(Report);
+              <ReportRow location='hk' sortedDates={sortedDates}></ReportRow>
+              <ReportRow location='tw' sortedDates={sortedDates}></ReportRow>
+          </tbody>
+        </table>
+      )
+    }

@@ -103,15 +103,14 @@ ReactDOM.render(
         <Tops location="tw"></Tops>
       </Provider>, document.getElementById('tw-tops'));
 
-      ReactDOM.render(
-        <Provider store={store}>
-                  <IntlProvider locale="zh">
-          <div>
-            <Report location="hk"></Report>
-              <Report location="tw"></Report>
-          </div>
-            </IntlProvider>
-        </Provider>, document.getElementById('reports'));
+  ReactDOM.render(
+    <Provider store={store}>
+        <IntlProvider locale="zh">
+      <div>
+        <Report></Report>
+      </div>
+        </IntlProvider>
+    </Provider>, document.getElementById('reports'));
 
 
       // var time
