@@ -5,6 +5,7 @@ var changed = require('gulp-changed');
 var webpackConfig = require('./webpack.config.js');
 var file = require('gulp-file');
 
+process.env.NODE_ENV='prd';
 gulp.task('webpack', function(callback) {
     // run webpack
     webpack(webpackConfig, function(err, stats) {
@@ -22,7 +23,6 @@ gulp.task('copy', function(){
 gulp.task('build', ['copy', 'webpack']);
 
 gulp.task('deploy',['build'], function() {
- process.env.NODE_ENV='prd';
  return gulp.src('dist/**/*')
     .pipe(file('CNAME', 'fbreactions.io'))
    .pipe(ghPages({

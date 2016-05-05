@@ -56,7 +56,7 @@ var config ={
 
 }
 
-if (process.env.NODE_ENV !== 'prd') { // Production
+if (process.env.NODE_ENV === 'dev') { // Production
 //for DEV only TODO another config for PRD
   config['devtool'] = 'eval';
 }
