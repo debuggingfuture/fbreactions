@@ -3,7 +3,7 @@ import moment from 'moment';
 moment.locale('zh-tw');
 import _ from 'lodash';
 import {getReactionImageUrl,getReactionsWithRatio} from './reaction.js';
-
+import chroma from 'chroma-js';
 // moment().format('MMMM Do YYYY, h:mm:ss a')
 import {IntlProvider,FormattedDate, addLocaleData} from 'react-intl';
 // _.omitBy(reactionsByDay, _.isEmpty)
@@ -39,12 +39,13 @@ const ReportRow = (props) =>{
                       return <td></td>
                     }
                     let reactionImgUrl = getReactionImageUrl(topReaction.type);
-
+                    let color = chroma.scale(['#4183c4','red']).classes(3)(topReaction.ratio*5).hex();
+                    console.log(color);
                     return (<td>
                       <h4 className="ui image header centered">
                         <img src={reactionImgUrl} className="ui mini rounded image" />
-                        <div className="centered content">
-                          {(topReaction.ratio*100).toFixed(0)}%
+                        <div className="centered content" >
+                          <span style={{'color':color}}>{(topReaction.ratio*100).toFixed(0)}%</span>
                           <div className="sub header">{topReaction.count}</div>
                         </div>
                       </h4>

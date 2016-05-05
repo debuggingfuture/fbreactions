@@ -14,7 +14,7 @@ export default (props) =>{
     <FormattedDate value={date} day="numeric" month="narrow"></FormattedDate>);
 
       return (
-        <table className="ui very basic unstackable celled padded large  table">
+        <table className="ui very basic unstackable celled padded large table">
           <thead>
             <tr>
               <th></th>
