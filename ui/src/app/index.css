@@ -25,7 +25,6 @@ section.tops{
   min-width:6em;
 }
 
-
 .location{
   -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 2s; /* Firefox < 16 */
@@ -38,4 +37,9 @@ section.tops{
 @-webkit-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+.like-button-img{
+    width:8vmin;
+    min-width:15%;
 }

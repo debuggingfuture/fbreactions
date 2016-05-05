@@ -14,7 +14,7 @@ import {IntlProvider,FormattedDate, addLocaleData} from 'react-intl';
 import {getReactionImageUrl} from './reaction.js';
 import Tops from './tops';
 import Report from './report';
-
+import LikeButton from './likeButton.jsx';
 
 const FETCH_AGG = 'FETCH_AGG';
 function getEndpoint(location) {
@@ -129,3 +129,9 @@ ReactDOM.render(
           <FormattedDate value={Date.now()} day="numeric" month="narrow" year="numeric"></FormattedDate>
           </IntlProvider>
         , document.getElementById('today'));
+
+
+        ReactDOM.render(
+          <LikeButton />,
+          document.getElementById('like-button')
+        );
