@@ -83,7 +83,6 @@ ns.update = function(el, state, props, dispatcher) {
 // TODO tune the charge
     // http://stackoverflow.com/questions/9901565/charge-based-on-size-d3-force-layout
     let k = this.k(nodes.length,props.width,props.height);
-    console.log("k"+k);
     var force = d3.layout.force()
     .nodes(nodes)
     .gravity(0.4)

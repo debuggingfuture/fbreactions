@@ -64,8 +64,6 @@ let store = createStore(
   })
 );
 
-console.log(fetch);
-
 ['hk','tw'].map(location=>
   fetch(getEndpoint(location))
   .then(function (res) {
@@ -82,7 +80,6 @@ console.log(fetch);
 
 
 require('lib/semantic/semantic.css');
-console.log(Dataviz);
 ReactDOM.render(
   <Provider store={store}>
     <Dataviz location='hk' ></Dataviz>

@@ -120,8 +120,6 @@ const Dataviz = (props) => {
 //     return this.setState(partialState, callback);
 //   }
 // });
-console.log(Dataviz);
-
 export default connect(
   mapStateToProps,
   null
