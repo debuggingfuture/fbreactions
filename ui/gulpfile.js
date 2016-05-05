@@ -22,6 +22,7 @@ gulp.task('copy', function(){
 gulp.task('build', ['copy', 'webpack']);
 
 gulp.task('deploy',['build'], function() {
+ process.env.NODE_ENV='prd';
  return gulp.src('dist/**/*')
     .pipe(file('CNAME', 'fbreactions.io'))
    .pipe(ghPages({

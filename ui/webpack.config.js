@@ -2,7 +2,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 var path = require('path');
 
-module.exports = {
+var config ={
   entry: './src/app/index.jsx',
   output: {
     path: path.join(__dirname, 'dist'),
@@ -53,6 +53,12 @@ module.exports = {
     'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
   })
 ],
-//for DEV only TODO another config for PRD
-devtool:"eval"
+
 }
+
+if (process.env.NODE_ENV !== 'prd') { // Production
+//for DEV only TODO another config for PRD
+  config['devtool'] = 'eval';
+}
+
+module.exports = config;
