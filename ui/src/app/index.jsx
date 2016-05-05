@@ -5,6 +5,7 @@ import Dataviz from './dataviz.jsx';
 import { Provider, connect } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 import _ from 'lodash';
+require('./report-mobile.css');
 // TODO pre load locale-data
 import zh from 'react-intl/locale-data/zh';
 addLocaleData([...zh])
@@ -103,7 +104,7 @@ ReactDOM.render(
   ReactDOM.render(
     <Provider store={store}>
         <IntlProvider locale="zh">
-      <div>
+      <div className="hscrollable">
         <Report></Report>
       </div>
         </IntlProvider>

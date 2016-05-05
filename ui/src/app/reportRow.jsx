@@ -22,7 +22,6 @@ const mapStateToProps = (state,props) => {
   }
 }
 
-
 const ReportRow = (props) =>{
 // TODO extract proper i18n
   let displayedName = props.location === 'hk' ? '香港': '台灣';
@@ -42,14 +41,13 @@ const ReportRow = (props) =>{
                     let reactionImgUrl = getReactionImageUrl(topReaction.type);
 
                     return (<td>
-                    <h4 className="ui image header">
-                      <img src={reactionImgUrl} className="ui mini rounded image" />
-                      <div className="content">
-                        {topReaction.count}
-                        <div className="sub header">{(topReaction.ratio*100).toFixed(0)}%
+                      <h4 className="ui image header centered">
+                        <img src={reactionImgUrl} className="ui mini rounded image" />
+                        <div className="centered content">
+                          {(topReaction.ratio*100).toFixed(0)}%
+                          <div className="sub header">{topReaction.count}</div>
                         </div>
-                      </div>
-                    </h4>
+                      </h4>
                   </td>)
                   }
               )}

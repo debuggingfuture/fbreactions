@@ -14,11 +14,11 @@ export default (props) =>{
     <FormattedDate value={date} day="numeric" month="narrow"></FormattedDate>);
 
       return (
-        <table className="ui very basic collapsing celled padded table">
+        <table className="ui very basic unstackable celled padded large  table">
           <thead>
             <tr>
               <th></th>
-              {dates.map(d=><th>{d}</th>)}
+              {dates.map(d=><th className="date">{d}</th>)}
             </tr>
           </thead>
           <tbody>
