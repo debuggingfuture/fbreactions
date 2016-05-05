@@ -10,10 +10,9 @@ const Top = (props) => {
   let url = 'https://www.facebook.com/'+props.info.id;
   let displayedTime = moment(props.info.created_time).format('MMM Do hh:mm');
 
-  let title = props.info.name ? props.info.name : props.info.message.substring(0,100) +' ...';
+  let title = (props.info.name && props.info.name !== "Timeline Photos") ? props.info.name : props.info.message.substring(0,30) +' ...';
 
   let pageName = pages[props.info.id.split("_")[0]];
-
   return (<div className="event">
     <div className="label centered">
       <img src={emotionUrl} />
