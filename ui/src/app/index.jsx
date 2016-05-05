@@ -1,11 +1,12 @@
-var ReactDOM = require('react-dom');
+require('lib/semantic/semantic.css');
+import ReactDOM from 'react-dom';
 import Dataviz from './dataviz.jsx';
 //boilerplate..
 //https://github.com/whatwg/fetch/issues/56
 import { Provider, connect } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 import _ from 'lodash';
-require('./report-mobile.css');
+require('./index.css');
 // TODO pre load locale-data
 import zh from 'react-intl/locale-data/zh';
 addLocaleData([...zh])
@@ -13,6 +14,7 @@ import {IntlProvider,FormattedDate, addLocaleData} from 'react-intl';
 import {getReactionImageUrl} from './reaction.js';
 import Tops from './tops';
 import Report from './report';
+
 
 const FETCH_AGG = 'FETCH_AGG';
 function getEndpoint(location) {
@@ -91,8 +93,6 @@ let store = createStore(
   })
 )
 
-
-require('lib/semantic/semantic.css');
 ReactDOM.render(
   <Provider store={store}>
     <Dataviz location='hk' ></Dataviz>

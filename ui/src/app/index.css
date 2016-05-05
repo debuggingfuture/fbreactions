@@ -1,0 +1,41 @@
+section.tops{
+  padding-top:10vh;
+}
+#reports {
+  padding-top:5em;
+  padding-bottom:5em;
+}
+
+
+/*always show scrollbar*/
+.hscrollable::-webkit-scrollbar {
+    -webkit-appearance: none;
+    height:4px;
+    width:2px;
+}
+.hscrollable::-webkit-scrollbar-thumb {
+    border-radius: 1px;
+    background-color: rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.2);
+}
+.hscrollable{
+  overflow-x:scroll;
+}
+#reports th.date{
+  min-width:6em;
+}
+
+
+.location{
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+     -ms-animation: fadein 2s; /* Internet Explorer */
+      -o-animation: fadein 2s; /* Opera < 12.1 */
+         animation: fadein 2s;
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
