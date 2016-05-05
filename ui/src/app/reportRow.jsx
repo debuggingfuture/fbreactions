@@ -24,9 +24,11 @@ const mapStateToProps = (state,props) => {
 
 
 const ReportRow = (props) =>{
+// TODO extract proper i18n
+  let displayedName = props.location === 'hk' ? '香港': '台灣';
   return (
             <tr>
-              <td>{props.location}</td>
+              <td>{displayedName}</td>
               {
                 props.sortedDates.map(d=>
                   {
