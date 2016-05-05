@@ -66423,7 +66423,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        dates.map(function (d) {
 	          return React.createElement(
 	            'th',
-	            null,
+	            { className: 'date' },
 	            d
 	          );
 	        })
