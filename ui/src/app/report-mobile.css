@@ -1,6 +1,7 @@
 ::-webkit-scrollbar {
     -webkit-appearance: none;
     height:4px;
+    width:2px;
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 1px;

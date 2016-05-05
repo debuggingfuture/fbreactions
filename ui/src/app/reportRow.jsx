@@ -40,7 +40,6 @@ const ReportRow = (props) =>{
                     }
                     let reactionImgUrl = getReactionImageUrl(topReaction.type);
                     let color = chroma.scale(['#4183c4','red']).classes(2)(topReaction.ratio*5).hex();
-                    console.log(color);
                     return (<td>
                       <h4 className="ui image header centered">
                         <img src={reactionImgUrl} className="ui mini rounded image" />
