@@ -10,6 +10,7 @@ require('./report-mobile.css');
 import zh from 'react-intl/locale-data/zh';
 addLocaleData([...zh])
 import {IntlProvider,FormattedDate, addLocaleData} from 'react-intl';
+import {getReactionImageUrl} from './reaction.js';
 import Tops from './tops';
 import Report from './report';
 
@@ -19,6 +20,17 @@ function getEndpoint(location) {
   url += '?location='+location;
   return url;
 }
+
+// TODO by daily (HK) emotion?
+// http://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
+(function() {
+    let reaction = _.sample(['haha','angry','love','wow','sad']);
+    var link = document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = getReactionImageUrl(reaction);
+    document.getElementsByTagName('head')[0].appendChild(link);
+}());
 
 // TODO
 // first load set it
