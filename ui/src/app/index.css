@@ -40,6 +40,7 @@ section.tops{
 }
 
 .like-button-img{
+    padding-top:1em;
     width:8vmin;
-    min-width:15%;
+    min-width:14em;
 }
