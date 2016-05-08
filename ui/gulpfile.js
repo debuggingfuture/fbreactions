@@ -14,6 +14,11 @@ gulp.task('webpack', function(callback) {
     });
 });
 
+gulp.task('copyCommon', function(){
+  gulp.src('../common/meta.js')
+    .pipe(gulp.dest('./src/app/'))
+});
+
 gulp.task('copy', function(){
   gulp.src('./images/**')
     .pipe(changed('dist/images'))

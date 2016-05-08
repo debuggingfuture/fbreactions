@@ -16,6 +16,9 @@ import Tops from './tops';
 import Report from './report';
 import LikeButton from './likeButton.jsx';
 
+// won't auto update until gulp script
+let REACTION_TYPES = require('./meta.js').REACTION_TYPES;
+
 const FETCH_AGG = 'FETCH_AGG';
 function getEndpoint(location) {
   var url = 'https://8zbfsx31e0.execute-api.ap-northeast-1.amazonaws.com/prod/reactions';
@@ -26,7 +29,7 @@ function getEndpoint(location) {
 // TODO by daily (HK) emotion?
 // http://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
 (function() {
-    let reaction = _.sample(['haha','angry','love','wow','sad']);
+    let reaction = _.sample(REACTION_TYPES);
     var link = document.createElement('link');
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';

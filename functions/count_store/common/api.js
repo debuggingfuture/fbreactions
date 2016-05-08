@@ -1,7 +1,7 @@
 var FbAPI = require('../common/fb-api').FbAPI;
 var redisUtil = require('../common/redis-util');
 var client = redisUtil.initClient();
-var REACTION_TYPES = require('../common/fb-api').REACTION_TYPES;
+var REACTION_TYPES = require('../common/meta').REACTION_TYPES;
 var _ = require('lodash');
 
 var moment = require('moment');

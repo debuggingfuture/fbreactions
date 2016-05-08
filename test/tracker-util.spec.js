@@ -2,7 +2,7 @@ var trackerUtil = require('../common/tracker-util');
 var sumReactions = trackerUtil.sumReactions;
 var initCount = trackerUtil.initCount;
 var initCountWithSummary = trackerUtil.initCountWithSummary;
-var REACTION_TYPES = require('../common/fb-api').REACTION_TYPES;
+var REACTION_TYPES = require('../common/meta').REACTION_TYPES;
 var _groupByIndex = trackerUtil._groupByIndex;
 var _insertIfTops = trackerUtil._insertIfTops;
 

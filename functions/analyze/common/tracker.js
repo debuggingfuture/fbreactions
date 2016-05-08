@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var REACTION_TYPES = require('../common/fb-api').REACTION_TYPES;
+var REACTION_TYPES = require('../common/meta').REACTION_TYPES;
 var util = require('../common/tracker-util');
 var FbAPI = require('../common/fb-api').FbAPI;
 var rp = require('request-promise');

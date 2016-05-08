@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var REACTION_TYPES = require('../common/fb-api').REACTION_TYPES;
+var REACTION_TYPES = require('../common/meta').REACTION_TYPES;
 
 function _groupByIndex(collection,cb){
   var result = {};

@@ -5,7 +5,7 @@ var appId = process.env.FB_APP_ID;
 var secret =  process.env.FB_APP_SECRET;
 var access_token = appId + '|' + secret;
 
-var REACTION_TYPES=['LIKE','LOVE','WOW','HAHA','SAD','ANGRY'];
+var REACTION_TYPES=['LIKE','LOVE','WOW','HAHA','SAD','ANGRY','THANKFUL'];
 
 var endpointConfig ={
   'graph':{
