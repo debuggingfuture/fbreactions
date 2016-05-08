@@ -5,7 +5,7 @@ var pages = require('./common/pages');
 var _ = require('lodash');
 var Promise = require("bluebird");
 var moment = require('moment');
-var getStartEndOfDayByDayOffset = require('time').getStartEndOfDayByDayOffset;
+var getStartEndOfDayByDayOffset = require('./common/time').getStartEndOfDayByDayOffset;
 
 var api = require('./common/api');
 // var getRandomByWeight = require('random').getRandomByWeight;
@@ -24,17 +24,18 @@ exports.handle = function(e, ctx,cb) {
     // });
     return Promise.all(_.range(7).map(function (d) {
       var startEnd = getStartEndOfDayByDayOffset(d);
-
+      var start =startEnd[0];
+      var end = startEnd[1];
       return tracker.aggReactionsForPostsByDateRange(start,end)
       .then(function (aggReactions) {
         console.log('location:'+location);
-        console.log('start:'+startEnd[0]).format());
-        console.log('end:'+startEnd[1]).format());
+        console.log('start:'+moment(start).format());
+        console.log('end:'+moment(end).format());
         console.log(aggReactions);
-        return api.resultByDateRange(location,startEnd[0],startEnd[1],aggReactions)
+        return api.resultByDateRange(location,start,end,aggReactions)
         .then(function (resultByDateRange) {
           console.log(resultByDateRange);
-          return  api.cacheWrite(location,startEnd[0],startEnd[1],resultByDateRange);
+          return  api.cacheWrite(location,start,end,resultByDateRange);
         });
       });
     }));

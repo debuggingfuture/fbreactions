@@ -3,7 +3,7 @@ var _ = require('lodash');
 var Promise = require("bluebird");
 var moment = require('moment');
 var api = require('./common/api');
-var getStartEndOfDayByDayOffset = require('time').getStartEndOfDayByDayOffset;
+var getStartEndOfDayByDayOffset = require('./common/time').getStartEndOfDayByDayOffset;
 
 exports.handle = function(e, ctx,cb) {
   console.log(e);

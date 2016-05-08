@@ -80,8 +80,10 @@ function sumReactionsWithTop(ids, counts) {
     var result=initCountWithSummary();
     REACTION_TYPES.map(function (key) {
       curr[key]= parseInt(curr[key]);
-      // ignored NaN
-      result['reactions'][key] = parseInt(prev['reactions'][key]) + curr[key];
+      if(Number.isFinite(curr[key])){
+        result['reactions'][key] = parseInt(prev['reactions'][key]) + curr[key];
+      }
+
     });
     result['summary']['total'] = parseInt(prev['summary']['total']) + parseInt(curr['total']);
 

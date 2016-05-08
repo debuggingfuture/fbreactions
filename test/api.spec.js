@@ -3,7 +3,7 @@ var moment = require('moment');
 var redisUtil = require('../common/redis-util');
 var client = redisUtil.initClient();
 var moment = require('moment');
-var getStartEndOfDayByDayOffset = require('time').getStartEndOfDayByDayOffset;
+var getStartEndOfDayByDayOffset = require('./common/time').getStartEndOfDayByDayOffset;
 
 describe('API resultByDateRange', function() {
   beforeEach(function() {

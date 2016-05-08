@@ -6,7 +6,7 @@ function getStartEndOfDayByDayOffset(dayOffset) {
   var start = moment().startOf('day').subtract(dayOffset,'days').valueOf();
   var end =   moment().endOf('day').subtract(dayOffset,'days').valueOf();
   //sad but no tuple es5
-  return [start,end]
+  return [start,end];
 }
 
 module.exports={
