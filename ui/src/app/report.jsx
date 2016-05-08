@@ -8,7 +8,7 @@ import ReportRow from './reportRow.jsx'
 import {IntlProvider,FormattedDate, addLocaleData} from 'react-intl';
 
 export default (props) =>{
-  let sortedDates = _.range(7).reverse()  .map(d=>moment().startOf('day').subtract(d,'days').valueOf());
+  let sortedDates = _.range(7).reverse().map(d=>moment().utc().startOf('day').subtract(d,'days').valueOf());
 
   let dates = sortedDates.map(date=>
     <FormattedDate value={date} day="numeric" month="narrow"></FormattedDate>);

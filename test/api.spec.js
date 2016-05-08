@@ -3,6 +3,8 @@ var moment = require('moment');
 var redisUtil = require('../common/redis-util');
 var client = redisUtil.initClient();
 var moment = require('moment');
+var getStartEndOfDayByDayOffset = require('time').getStartEndOfDayByDayOffset;
+
 describe('API resultByDateRange', function() {
   beforeEach(function() {
     var multi = client.multi();
@@ -20,8 +22,8 @@ describe('API resultByDateRange', function() {
 
 
   it('should return top with metadata', function (done) {
-    var start = moment().startOf('day').subtract(0,'days').format('x');
-    var end =   moment().endOf('day').subtract(0,'days').format('x');
+    var start = getStartEndOfDayByDayOffset(0)[0];
+    var end =  getStartEndOfDayByDayOffset(0)[1];
 
     var reactions = {
       LIKE: 50401, LOVE: 1454, WOW: 1255, HAHA: 5780, SAD: 4055, ANGRY: 8953

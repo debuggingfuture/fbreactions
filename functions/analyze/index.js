@@ -5,6 +5,7 @@ var pages = require('./common/pages');
 var _ = require('lodash');
 var Promise = require("bluebird");
 var moment = require('moment');
+var getStartEndOfDayByDayOffset = require('time').getStartEndOfDayByDayOffset;
 
 var api = require('./common/api');
 // var getRandomByWeight = require('random').getRandomByWeight;
@@ -22,19 +23,18 @@ exports.handle = function(e, ctx,cb) {
     //   console.log(trackerUtil.asRatio(result));
     // });
     return Promise.all(_.range(7).map(function (d) {
-      var start = moment().startOf('day').subtract(d,'days').format('x');
-      var end =   moment().endOf('day').subtract(d,'days').format('x');
+      var startEnd = getStartEndOfDayByDayOffset(d);
 
       return tracker.aggReactionsForPostsByDateRange(start,end)
       .then(function (aggReactions) {
         console.log('location:'+location);
-        console.log('start:'+moment(parseInt(start)).format());
-        console.log('end:'+moment(parseInt(end)).format());
+        console.log('start:'+startEnd[0]).format());
+        console.log('end:'+startEnd[1]).format());
         console.log(aggReactions);
-        return api.resultByDateRange(location,start,end,aggReactions)
+        return api.resultByDateRange(location,startEnd[0],startEnd[1],aggReactions)
         .then(function (resultByDateRange) {
           console.log(resultByDateRange);
-          return  api.cacheWrite(location,start,end,resultByDateRange);
+          return  api.cacheWrite(location,startEnd[0],startEnd[1],resultByDateRange);
         });
       });
     }));
