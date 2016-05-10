@@ -16,7 +16,6 @@ exports.handle = function(e, ctx,cb) {
   Promise.all(['hk','tw'].map(function (location) {
     var tracker = Tracker(location);
     winston.log('info','agg for %s',location);
-
     // tracker.aggReactionsForLatestPost(1000000,'*')
     // .then(function (result) {
     //   winston.log('info','Agg: %s',location,result);
