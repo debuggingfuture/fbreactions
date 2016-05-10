@@ -83,7 +83,6 @@ function sumReactionsWithTop(ids, counts) {
       if(Number.isFinite(curr[key])){
         result['reactions'][key] = parseInt(prev['reactions'][key]) + curr[key];
       }
-
     });
     result['summary']['total'] = parseInt(prev['summary']['total']) + parseInt(curr['total']);
 
