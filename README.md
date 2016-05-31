@@ -12,8 +12,19 @@
 ### Lambda
 - Execution is based on [AWS Lambda](https://slides.com/chunyinvincentlau/serverless-aws-lambda)
 - deployed using [Apex](https://github.com/apex/apex), v0.9+ with settings in `project.json` and functions in `functions`
-- Export `FB_APP_ID`, `FB_APP_SECRET` and AWS variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION` to work
-- sample: `apex invoke count_store`
+- export AWS variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION` for apex to work
+- Deploy with `FB_APP_ID`, `FB_APP_SECRET` environment variables at apex
+- sample: `apex -s FB_APP_ID='123' -s FB_APP_SECRET='456' deploy`
 
 ## Setup
 npm install && npm install -g mocha  protractor  webpack  webpack-dev-server  karma-cli
+
+## Upcoming
+- refer to issues
+- Select by Date
+- Quote to share
+- More Countries
+
+## Thanks
+- @siulun for providing the high resolution pics!
+- [mroth/emojitracker](https://github.com/mroth/emojitracker) for inspirations
