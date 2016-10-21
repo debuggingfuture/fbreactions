@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
+    "dev": "export NODE_ENV='DEV';webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -45,9 +46,11 @@
     "exports-loader": "^0.6.2",
     "imports-loader": "^0.6.5",
     "lodash": "4.11.2",
-    "moment": "^2.13.0",
-    "react": "15.0.1",
-    "react-dom": "15.0.1",
+    "moment": "^2.15.1",
+    "react": "^15.3.2",
+    "react-addons-shallow-compare": "^15.3.2",
+    "react-dates": "^3.3.4",
+    "react-dom": "^15.3.2",
     "react-redux": "^4.4.1",
     "react-scroll": "^1.0.3",
     "redux": "~3.3.1",

@@ -5,3 +5,4 @@ ui/node_modules
 ui/dist
 ui/.publish
 .DS_Store
+npm-debug.log

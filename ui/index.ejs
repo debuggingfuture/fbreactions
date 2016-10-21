@@ -1,39 +1,198 @@
 <!DOCTYPE html>
-<html  lang="zh">
+<html lang="zh">
+
 <head>
-  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta property="og:url"           content="https://fbreactions.io" />
-	<meta property="og:type"          content="website" />
-	<meta property="og:title"         content="港台時事情緒天文台" />
-	<meta property="og:description"   content="每日統計港台Facebook最受歡迎10個新聞媒體專頁Reaction百份比" />
-	<meta property="og:image"         content="https://fbreactions.io/images/fbreactions.png" />
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <meta property="og:url" content="https://fbreactions.io" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="港台時事情緒天文台" />
+  <meta property="og:description" content="每日統計港台Facebook最受歡迎10個新聞媒體專頁Reaction百份比" />
+  <meta property="og:image" content="https://fbreactions.io/images/fbreactions.png" />
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
   <script src="https://fb.me/react-with-addons-15.0.1.min.js"></script>
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Intl.~locale.zh"></script>
   <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-77257887-1', 'auto',{'siteSpeedSampleRate': 100});
-  ga('send', 'pageview');
+    ga('create', 'UA-77257887-1', 'auto', {
+      'siteSpeedSampleRate': 100
+    });
+    ga('send', 'pageview');
+  </script>
 
-</script>
-
-<link href='//fonts.googleapis.com/css?family=Gentium+Book Basic:700|Alegreya:400|Alegraya:400' rel='stylesheet' type='text/css'>
-<script type="text/javascript">var _jf = _jf || [];_jf.push(['p','42019']);_jf.push(['_setFont','wt005','css','.wt005']);_jf.push(['_setFont','wt005','alias','wt005']);_jf.push(['_setFont','wt005','english','Gentium Book Basic']);_jf.push(['_setFont','wt005','weight',900]);_jf.push(['_setFont','xingothic-tc-w8','css','.xingothic-tc-w8']);_jf.push(['_setFont','xingothic-tc-w8','alias','xingothic-tc']);_jf.push(['_setFont','xingothic-tc-w8','weight',800]);_jf.push(['_setFont','datf5','css','.datf5']);_jf.push(['_setFont','datf5','alias','datf5']);_jf.push(['_setFont','datf5','english','Alegreya']);_jf.push(['_setFont','datf5','weight',500]);_jf.push(['_setFont','dats4','css','.dats4']);_jf.push(['_setFont','dats4','alias','dats4']);_jf.push(['_setFont','dats4','english','Alegraya']);_jf.push(['_setFont','dats4','weight',400]);(function(f,q,c,h,e,i,r,d){var k=f._jf;if(k.constructor===Object){return}var l,t=q.getElementsByTagName("html")[0],a=function(u){for(var v in k){if(k[v][0]==u){if(false===k[v][1].call(k)){break}}}},j=/\S+/g,o=/[\t\r\n\f]/g,b=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,g="".trim,s=g&&!g.call("\uFEFF\xA0")?function(u){return u==null?"":g.call(u)}:function(u){return u==null?"":(u+"").replace(b,"")},m=function(y){var w,z,v,u,x=typeof y==="string"&&y;if(x){w=(y||"").match(j)||[];z=t[c]?(" "+t[c]+" ").replace(o," "):" ";if(z){u=0;while((v=w[u++])){if(z.indexOf(" "+v+" ")<0){z+=v+" "}}t[c]=s(z)}}},p=function(y){var w,z,v,u,x=arguments.length===0||typeof y==="string"&&y;if(x){w=(y||"").match(j)||[];z=t[c]?(" "+t[c]+" ").replace(o," "):"";if(z){u=0;while((v=w[u++])){while(z.indexOf(" "+v+" ")>=0){z=z.replace(" "+v+" "," ")}}t[c]=y?s(z):""}}},n;k.push(["_eventActived",function(){p(h);m(e)}]);k.push(["_eventInactived",function(){p(h);m(i)}]);k.addScript=n=function(u,A,w,C,E,B){E=E||function(){};B=B||function(){};var x=q.createElement("script"),z=q.getElementsByTagName("script")[0],v,y=false,D=function(){x.src="";x.onerror=x.onload=x.onreadystatechange=null;x.parentNode.removeChild(x);x=null;a("_eventInactived");B()};if(C){v=setTimeout(function(){D()},C)}x.type=A||"text/javascript";x.async=w;x.onload=x.onreadystatechange=function(G,F){if(!y&&(!x.readyState||/loaded|complete/.test(x.readyState))){y=true;if(C){clearTimeout(v)}x.src="";x.onerror=x.onload=x.onreadystatechange=null;x.parentNode.removeChild(x);x=null;if(!F){setTimeout(function(){E()},200)}}};x.onerror=function(H,G,F){if(C){clearTimeout(v)}D();return true};x.src=u;z.parentNode.insertBefore(x,z)};a("_eventPreload");m(h);n(r,"text/javascript",false,3000)})(this,this.document,"className","jf-loading","jf-active","jf-inactive","//ds.justfont.com/js/stable/v/4.9.8/id/179670128310");</script></head>
+  <link href='//fonts.googleapis.com/css?family=Gentium+Book Basic:700|Alegreya:400|Alegraya:400' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _jf = _jf || [];
+    _jf.push(['p', '42019']);
+    _jf.push(['_setFont', 'wt005', 'css', '.wt005']);
+    _jf.push(['_setFont', 'wt005', 'alias', 'wt005']);
+    _jf.push(['_setFont', 'wt005', 'english', 'Gentium Book Basic']);
+    _jf.push(['_setFont', 'wt005', 'weight', 900]);
+    _jf.push(['_setFont', 'xingothic-tc-w8', 'css', '.xingothic-tc-w8']);
+    _jf.push(['_setFont', 'xingothic-tc-w8', 'alias', 'xingothic-tc']);
+    _jf.push(['_setFont', 'xingothic-tc-w8', 'weight', 800]);
+    _jf.push(['_setFont', 'datf5', 'css', '.datf5']);
+    _jf.push(['_setFont', 'datf5', 'alias', 'datf5']);
+    _jf.push(['_setFont', 'datf5', 'english', 'Alegreya']);
+    _jf.push(['_setFont', 'datf5', 'weight', 500]);
+    _jf.push(['_setFont', 'dats4', 'css', '.dats4']);
+    _jf.push(['_setFont', 'dats4', 'alias', 'dats4']);
+    _jf.push(['_setFont', 'dats4', 'english', 'Alegraya']);
+    _jf.push(['_setFont', 'dats4', 'weight', 400]);
+    (function(f, q, c, h, e, i, r, d) {
+      var k = f._jf;
+      if (k.constructor === Object) {
+        return
+      }
+      var l, t = q.getElementsByTagName("html")[0],
+        a = function(u) {
+          for (var v in k) {
+            if (k[v][0] == u) {
+              if (false === k[v][1].call(k)) {
+                break
+              }
+            }
+          }
+        },
+        j = /\S+/g,
+        o = /[\t\r\n\f]/g,
+        b = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
+        g = "".trim,
+        s = g && !g.call("\uFEFF\xA0") ? function(u) {
+          return u == null ? "" : g.call(u)
+        } : function(u) {
+          return u == null ? "" : (u + "").replace(b, "")
+        },
+        m = function(y) {
+          var w, z, v, u, x = typeof y === "string" && y;
+          if (x) {
+            w = (y || "").match(j) || [];
+            z = t[c] ? (" " + t[c] + " ").replace(o, " ") : " ";
+            if (z) {
+              u = 0;
+              while ((v = w[u++])) {
+                if (z.indexOf(" " + v + " ") < 0) {
+                  z += v + " "
+                }
+              }
+              t[c] = s(z)
+            }
+          }
+        },
+        p = function(y) {
+          var w, z, v, u, x = arguments.length === 0 || typeof y === "string" && y;
+          if (x) {
+            w = (y || "").match(j) || [];
+            z = t[c] ? (" " + t[c] + " ").replace(o, " ") : "";
+            if (z) {
+              u = 0;
+              while ((v = w[u++])) {
+                while (z.indexOf(" " + v + " ") >= 0) {
+                  z = z.replace(" " + v + " ", " ")
+                }
+              }
+              t[c] = y ? s(z) : ""
+            }
+          }
+        },
+        n;
+      k.push(["_eventActived", function() {
+        p(h);
+        m(e)
+      }]);
+      k.push(["_eventInactived", function() {
+        p(h);
+        m(i)
+      }]);
+      k.addScript = n = function(u, A, w, C, E, B) {
+        E = E || function() {};
+        B = B || function() {};
+        var x = q.createElement("script"),
+          z = q.getElementsByTagName("script")[0],
+          v, y = false,
+          D = function() {
+            x.src = "";
+            x.onerror = x.onload = x.onreadystatechange = null;
+            x.parentNode.removeChild(x);
+            x = null;
+            a("_eventInactived");
+            B()
+          };
+        if (C) {
+          v = setTimeout(function() {
+            D()
+          }, C)
+        }
+        x.type = A || "text/javascript";
+        x.async = w;
+        x.onload = x.onreadystatechange = function(G, F) {
+          if (!y && (!x.readyState || /loaded|complete/.test(x.readyState))) {
+            y = true;
+            if (C) {
+              clearTimeout(v)
+            }
+            x.src = "";
+            x.onerror = x.onload = x.onreadystatechange = null;
+            x.parentNode.removeChild(x);
+            x = null;
+            if (!F) {
+              setTimeout(function() {
+                E()
+              }, 200)
+            }
+          }
+        };
+        x.onerror = function(H, G, F) {
+          if (C) {
+            clearTimeout(v)
+          }
+          D();
+          return true
+        };
+        x.src = u;
+        z.parentNode.insertBefore(x, z)
+      };
+      a("_eventPreload");
+      m(h);
+      n(r, "text/javascript", false, 3000)
+    })(this, this.document, "className", "jf-loading", "jf-active", "jf-inactive", "//ds.justfont.com/js/stable/v/4.9.8/id/179670128310");
+  </script>
+</head>
 <!-- Begin Inspectlet Embed Code -->
 <script type="text/javascript" id="inspectletjs">
-window.__insp = window.__insp || [];
-__insp.push(['wid', 444346155]);
-(function() {
-function ldinsp(){if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
-setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
-})();
+  window.__insp = window.__insp || [];
+  __insp.push(['wid', 444346155]);
+  (function() {
+    function ldinsp() {
+      if (typeof window.__inspld != "undefined") return;
+      window.__inspld = 1;
+      var insp = document.createElement('script');
+      insp.type = 'text/javascript';
+      insp.async = true;
+      insp.id = "inspsync";
+      insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(insp, x);
+    };
+    setTimeout(ldinsp, 500);
+    document.readyState != "complete" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
+  })();
 </script>
 <!-- End Inspectlet Embed Code -->
+
 <body>
   <section class="ui container">
     <h2 style="padding-top:5vh;" class="ui centered header">
@@ -45,11 +204,9 @@ setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent
       </span>
       <span id="fb-root"></span>
 
-	<!-- Your share button code -->
-	<div class="fb-share-button"
-		data-href="https://fbreactions.io"
-		data-layout="button_count">
-	</div>
+      <!-- Your share button code -->
+      <div class="fb-share-button" data-href="https://fbreactions.io" data-layout="button_count">
+      </div>
     </div>
     <h2 class="ui horizontal divider header">
       <div id="today"></div>
@@ -59,7 +216,7 @@ setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent
     <div class="App ui centered aligned two column stackable grid">
       <div class="location hk column center aligned">
         <span class="title">香港</span>
-        <img className='map' src="images/hkout.gif"></img>
+        <img class="map" src="images/hkout.gif"></img>
       </div>
       <div class="column">
         <div id="hk-viz">
@@ -115,22 +272,24 @@ setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent
     </h2>
     <div id="like-button">
   </section>
-  <footer class="ui center aligned grid" >
+  <footer class="ui center aligned grid">
     <div class="row">
       Created by:&nbsp;<a target="_blank" href="https://twitter.com/vincent_lcy"> @vincent_lcy</a>
     </div>
-    <div class="row" >Inspired by:&nbsp;<a target="_blank" href="https://github.com/mroth/emojitracker">mroth/emojictracker</a></div>
+    <div class="row">Inspired by:&nbsp;<a target="_blank" href="https://github.com/mroth/emojitracker">mroth/emojictracker</a></div>
     <div class="row"><a target="_blank" href="https://github.com/vincentlaucy/fbreactions">Source Code</a>
     </div>
   </footer>
   <script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.6&appId=265853637086493";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.6&appId=265853637086493";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
 </body>
 
 </html>
