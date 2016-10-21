@@ -18,7 +18,7 @@ class SingleDatePickerWrapper extends React.Component {
 
   onDateChange (date) {
     this.setState({ date})
-    var offset = moment().diff(moment(date), 'days')
+    var offset = moment().startOf('day').diff(moment(date).startOf('day'), 'days')
 
     // TODO refactor with
     // http://redux.js.org/docs/advanced/AsyncActions.html
