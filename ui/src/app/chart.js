@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import d3Chart from './d3Chart'
-import ReactDOM from 'react-dom'
+
 const Chart = React.createClass({
   getDefaultProps: function () {
     return {
@@ -11,18 +11,23 @@ const Chart = React.createClass({
 
   dispatcher: null,
 
-  componentDidMount: function () {
+  _createDispatcher: function () {
     var el = ReactDOM.findDOMNode(this)
-    var dispatcher = d3Chart.create(el, {
+    return d3Chart.create(el, {
       width: this.props.width,
       height: this.props.height
     }, this.getChartState())
-    this.dispatcher = dispatcher
+  },
+  componentDidMount: function () {
+    this.dispatcher = this._createDispatcher()
   },
 
   componentDidUpdate: function (prevProps, prevState) {
     var el = ReactDOM.findDOMNode(this)
-    d3Chart.update(el, this.getChartState(), this.props, this.dispatcher)
+    // Hack to completely redraw for now, if state
+    d3Chart.destroy(el)
+    this.dispatcher = this._createDispatcher()
+  // d3Chart.update(el, this.getChartState(), this.props, this.dispatcher)
   },
 
   getChartState: function () {
