@@ -38,7 +38,8 @@ var config = {
     // don't bundle the 'react' npm package with our bundle.js
     // but get it from a global 'React' variable
     'intl': 'IntlPolyfill',
-    'react': 'React'
+    'react': 'React',
+    'react-dom': 'ReactDOM'
   },
   resolve: {
     root: [__dirname],

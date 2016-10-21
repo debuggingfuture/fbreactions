@@ -1,6 +1,5 @@
 console.log(process.env.NODE_ENV)
 require('lib/semantic/semantic.css')
-import ReactDOM from 'react-dom'
 import Dataviz from './dataviz.jsx'
 // boilerplate..
 // https://github.com/whatwg/fetch/issues/56

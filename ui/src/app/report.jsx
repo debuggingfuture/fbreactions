@@ -8,7 +8,6 @@ import ReportRow from './reportRow.jsx'
 import { IntlProvider, FormattedDate, addLocaleData } from 'react-intl'
 
 function _getSortedDates (lastDate) {
-  console.log(moment(lastDate).format('MMM Do YY'))
   return {sortedDates: _.range(7).reverse().map(d => moment(lastDate).utc().startOf('day').subtract(d, 'days').valueOf())}
 }
 
