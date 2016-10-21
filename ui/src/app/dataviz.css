@@ -35,14 +35,15 @@ footer{
 }
 .location img{
     z-index:1;
+
 }
 
 .location.hk img{
   padding-top: 10vmin;
   /*padding-left:10vmin;*/
-  /*min-height:10vmin;*/
-  /*min-width:50vmin;*/
-  height:20%;
+  min-height:50vmin;
+  min-width:50vmin;
+  /*height:20%;*/
   width:80%;
   z-index:1000;
 }
@@ -51,9 +52,8 @@ footer{
   width:25%;
   padding-top: 10vmin;
   /*width: 40%;*/
-  /*min-width:20vmin;*/
-  /*max-width:15vmin;*/
-  min-width:15vmin;
+  min-height:100vmin;
+  min-width:50vmin;
   height:35%;
   z-index:1000;
 }

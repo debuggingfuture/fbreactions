@@ -44,3 +44,22 @@ section.tops{
     width:8vmin;
     min-width:14em;
 }
+.calendar-button{
+  width:1em;
+  height:1em;
+}
+.SingleDatePicker .DateInput{
+  width: 100%;
+  min-width: 100%;
+
+}
+
+.SingleDatePicker .DateInput input{
+  cursor: pointer;
+}
+
+#today .SingleDatePickerInput{
+  border: 0px;
+  min-width: 30vw;
+  min-width: 10em;
+}
