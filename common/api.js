@@ -34,7 +34,7 @@ function cacheRead (location, start, end) {
   var key = _locationKey(location)
   var days = Math.ceil((end - start) / 86400000)
   // TODO refactor as duplicated
-  var offset = moment().diff(moment(end), 'days')
+  var offset = moment().diff(moment(end).startOf('day'), 'days')
   console.log('read for ' + days + 'offset:' + offset)
   var dateRangekeys = _.range(0, days).map(function (d) {
     var start = moment().startOf('day').subtract(offset + d, 'days').format('x')
