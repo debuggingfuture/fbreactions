@@ -12,7 +12,7 @@ exports.handle = function (e, ctx, cb) {
   var offset = parseInt(e.params.querystring.offset) || 0
   var start = getStartEndOfDayByDayOffset(offset + 7)[0]
   var end = getStartEndOfDayByDayOffset(offset + 0)[1]
-
+  console.log('offset:' + offset + 'start:' + start + 'end:' + end)
   return api.cacheRead(e.params.querystring.location, start, end)
     .then(function (result) {
       console.log(result)
