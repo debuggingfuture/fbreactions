@@ -1,5 +1,4 @@
 # fbreactions
-- http://slides.com/chunyinvincentlau/deck-26#/
 - Live at [fbreactions.io](fbreactions.io)
 - [港台媒體FB心情數據分析](https://slides.com/chunyinvincentlau/fbreactions)
 - [Making of fbreactions.io](https://slides.com/chunyinvincentlau/fbreactions-making-of/)
