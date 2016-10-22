@@ -5,7 +5,7 @@ import Dataviz from './dataviz.jsx'
 // https://github.com/whatwg/fetch/issues/56
 import { Provider, connect } from 'react-redux'
 import { combineReducers, createStore } from 'redux'
-// 
+//
 require('./index.css')
 // TODO pre load locale-data
 import zh from 'react-intl/locale-data/zh'
@@ -45,7 +45,7 @@ function getEndpoint (location, offset) {
 // TODO
 // first load set it
 // cannot base on another state to reduce
-function selectedDate (state = '' , action) {
+function selectedDate (state = '', action) {
   switch (action.type) {
     case FETCH_AGG:
       return action.payload.selectedDate
@@ -54,7 +54,7 @@ function selectedDate (state = '' , action) {
 }
 // https://github.com/acdlite/flux-standard-action
 // Hacky to make use of meta to skip unrelated actions
-function reactionsByDay (location, state = {} , action) {
+function reactionsByDay (location, state = {}, action) {
   if (!action.payload) {
     return {}
   }
@@ -65,7 +65,7 @@ function reactionsByDay (location, state = {} , action) {
   }
   return state
 }
-function tops (location, state = [] , action) {
+function tops (location, state = [], action) {
   if (!action.payload) {
     return []
   }

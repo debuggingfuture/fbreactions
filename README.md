@@ -1,7 +1,7 @@
 # fbreactions
-- Live at [fbreactions.io](fbreactions.io)
+- Live at [fbreactions.io](https://fbreactions.io)
 - [港台媒體FB心情數據分析](https://slides.com/chunyinvincentlau/fbreactions)
-- [Making of fbreactions.io](https://slides.com/chunyinvincentlau/fbreactions-making-of/)
+- [Making of fbreactions.io](https://bit.ly/fbreactionsio)
 
 # Stack
 - UI: ES6 +  angular 1.5 + webpack + semanticui
