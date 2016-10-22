@@ -6,9 +6,9 @@ export default React.createClass({
     value: React.PropTypes.string
   },
 
-  render() {
+  render () {
     return (
-      <img className='calendar-button' onClick={this.props.onClick} src='http://www.freeiconspng.com/uploads/calendar-icon-png-14.png'></img>
+      <img className='calendar-button' onClick={this.props.onClick} src='http://www.freeiconspng.com/uploads/calendar-icon-png-14.png' />
     )
   }
 })

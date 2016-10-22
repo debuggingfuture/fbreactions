@@ -14,7 +14,7 @@ function _getSortedDates (lastDate) {
 const mapStateToProps = (state, props) => {
   if (!state.selectedDate) {
     return _getSortedDates(moment())
-  }else {
+  } else {
     return _getSortedDates(parseInt(state.selectedDate.split('_')[0]))
   }
 }
@@ -22,21 +22,21 @@ const mapStateToProps = (state, props) => {
 const Report = (props) => {
   // let sortedDates = _.range(7).reverse().map(d => moment().utc().startOf('day').subtract(d, 'days').valueOf())
 
-  let dates = props.sortedDates.map(date => <FormattedDate value={date} day='numeric' month='narrow'></FormattedDate>)
+  let dates = props.sortedDates.map(date => <FormattedDate value={date} day='numeric' month='narrow' />)
 
   return (
     <table className='ui very basic unstackable celled padded large table'>
       <thead>
         <tr>
-          <th></th>
+          <th />
           {dates.map(d => <th className='date'>
                             {d}
                           </th>)}
         </tr>
       </thead>
       <tbody>
-        <ReportRow location='hk' sortedDates={props.sortedDates}></ReportRow>
-        <ReportRow location='tw' sortedDates={props.sortedDates}></ReportRow>
+        <ReportRow location='hk' sortedDates={props.sortedDates} />
+        <ReportRow location='tw' sortedDates={props.sortedDates} />
       </tbody>
     </table>
   )
