@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import d3Chart from './d3Chart'
 
 const Chart = React.createClass({
@@ -34,7 +33,7 @@ const Chart = React.createClass({
     var appState = this.props.appState
     let reactions = this.props.reactions
 
-    return _.assign({}, appState, { reactions})
+    return _.assign({}, appState, {reactions})
   },
 
   render: function () {

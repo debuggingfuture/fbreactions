@@ -3,7 +3,9 @@ var webpack = require('webpack')
 var path = require('path')
 
 var config = {
-  entry: './src/app/index.jsx',
+  entry: {
+    app: './src/app/index.jsx'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
@@ -46,12 +48,13 @@ var config = {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [new HtmlWebpackPlugin({
-    title: '港台時事情緒天文台(測試中)',
-    template: 'index.ejs', // Load a custom template
+    title: '港台時事情緒天文台',
+    template: 'index.ejs' // Load a custom template
   // inject: 'body' // Inject all scripts into the body
   }),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+      '_': 'lodash'
     }),
     new webpack.DefinePlugin({
       'process.env': {

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import moment from 'moment'
 moment.locale('zh-tw')
-import _ from 'lodash'
+
 import {getReactionImageUrl, getReactionsWithRatio} from './reaction.js'
 import chroma from 'chroma-js'
 // moment().format('MMMM Do YYYY, h:mm:ss a')

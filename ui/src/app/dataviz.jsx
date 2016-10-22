@@ -1,7 +1,7 @@
 import Chart from './chart'
 
 // window.app = React.renderComponent(App(), document.body)
-import _ from 'lodash'
+
 var classNames = require('classnames')
 import { Provider, connect } from 'react-redux'
 require('./dataviz.css')

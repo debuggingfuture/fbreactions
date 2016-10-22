@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import moment from 'moment'
-import _ from 'lodash'
+
 moment.locale('zh-tw')
 import { getReactionImageUrl, getReactionsWithRatio } from './reaction.js'
 import ReportRow from './reportRow.jsx'

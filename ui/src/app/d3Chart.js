@@ -1,14 +1,8 @@
 var EventEmitter = require('events').EventEmitter
 var d3 = require('d3')
-import _ from 'lodash'
+
 require('./d3Chart.css')
 import { getReactionImageUrl, getReactionsWithRatio } from './reaction.js'
-var ANIMATION_DURATION = 400
-var TOOLTIP_WIDTH = 30
-var TOOLTIP_HEIGHT = 30
-
-var MAX_WIDTH = 450
-var MAX_HEIGHT = 400
 
 function isMobile () {
   var check = false
