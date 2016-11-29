@@ -4,20 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/**.spec.js",
     "deploy": "apex -s FB_APP_ID='$FB_APP_ID' -s FB_APP_SECRET=='$FB_APP_SECRET' deploy"
   },
   "author": "",
   "license": "MIT",
+  "eslint": {
+    "extends": "google",
+    "rules": {}
+  },
   "dependencies": {
     "bluebird": "^3.3.5",
     "chai": "^3.5.0",
     "dotenv": "^2.0.0",
     "limiter": "^1.1.0",
     "lodash": "*",
+    "mocha": "^3.2.0",
     "moment": "^2.13.0",
     "redis": "^2.6.0-1",
     "request-promise": "*",
     "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-config-google": "^0.7.1"
   }
 }

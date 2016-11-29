@@ -24,13 +24,6 @@ import { FETCH_AGG } from './store/actions'
 // won't auto update until gulp script
 let REACTION_TYPES = require('./meta.js').REACTION_TYPES
 
-function getEndpoint (location, offset) {
-  var url = 'https://8zbfsx31e0.execute-api.ap-northeast-1.amazonaws.com/prod/reactions'
-  url += '?location=' + location
-  url += '&offset=' + offset || 0
-  return url
-}
-
 // TODO by daily (HK) emotion?
 // http://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
 (function () {
